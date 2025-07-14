@@ -1,0 +1,116 @@
+sequenceDiagram
+    participant U as User
+    participant PD as Processes Dashboard
+    participant AM as Analytics Module
+    participant API as Backend API
+    participant PS as Process Service
+    participant AS as Activity Service
+    participant NS as Notification Service
+
+    Note over U, PD: User accesses process monitoring
+    U->>PD: Access processes dashboard
+    PD->>API: GET /api/processes/metrics/overview
+    API->>AM: Calculate performance KPIs
+    AM->>PS: Query process execution data
+    PS->>AM: Return execution statistics
+    AM->>API: Return calculated metrics
+    API->>PD: Performance data
+    PD->>U: Display KPIs (127 processes, 84% success rate)
+    
+    Note over AM, PD: Real-time metrics updates
+    AM->>AM: Calculate detailed performance metrics
+    AM->>PD: Push metric updates every 30 seconds
+    PD->>U: Update success rate (84% → 85%)
+    PD->>U: Update avg execution time (2.7h → 2.6h)
+    PD->>U: Update automation rate (78% → 79%)
+    PD->>U: Update error rate (2.1% → 1.9%)
+    
+    Note over U, PD: User investigates performance trends
+    U->>PD: Hover over success rate metric
+    PD->>AM: GET /api/analytics/success-rate/trend
+    AM->>PD: Return 7-day trend data
+    PD->>U: Show trend tooltip (+3% improvement)
+    
+    U->>PD: Hover over execution time metric
+    PD->>AM: GET /api/analytics/execution-time/trend
+    AM->>PD: Return performance trend
+    PD->>U: Show efficiency tooltip (-15% improvement)
+    
+    Note over U, PD: Process health monitoring
+    PD->>PS: GET /api/processes/health-status
+    PS->>AM: Analyze process performance
+    AM->>PS: Return health scores
+    PS->>PD: Health status for all processes
+    PD->>U: Show process table with health indicators
+    PD->>U: Highlight processes with low success rates
+    
+    Note over U, PD: Individual process performance review
+    U->>PD: Click on "Weekly Newsletter Campaign" process
+    PD->>PS: GET /api/processes/{id}/performance
+    PS->>AM: Get detailed process metrics
+    AM->>PS: Return process-specific data
+    PS->>PD: Process performance data
+    PD->>U: Show detailed process metrics modal
+    PD->>U: Display usage count (23 uses)
+    PD->>U: Display success rate (94%)
+    PD->>U: Display average execution time (1.2h)
+    
+    Note over U, PD: Activity monitoring
+    PD->>AS: GET /api/activity/recent
+    AS->>PD: Return recent process activities
+    PD->>U: Show activity feed
+    PD->>U: Display "Process deployed: Content Creation Workflow"
+    PD->>U: Display "Process updated: Social Media Automation"
+    PD->>U: Display "Process completed: Email Campaign (Success)"
+    
+    Note over AM, NS: Performance threshold monitoring
+    AM->>AM: Analyze process performance patterns
+    AM->>AM: Detect success rate below 80%
+    AM->>NS: Trigger performance alert
+    NS->>U: Send notification "Process performance below threshold"
+    NS->>PD: Show alert banner
+    PD->>U: Display "1 process requires attention"
+    
+    Note over U, PD: Performance optimization workflow
+    U->>PD: Click on alert banner
+    PD->>AM: GET /api/analytics/underperforming-processes
+    AM->>PD: Return processes below threshold
+    PD->>U: Show performance review modal
+    PD->>U: List "Blog Content Generation (75% success)"
+    
+    U->>PD: Click "Analyze Process"
+    PD->>PS: GET /api/processes/{id}/failure-analysis
+    PS->>AM: Analyze failure patterns
+    AM->>PS: Return failure root causes
+    PS->>PD: Failure analysis data
+    PD->>U: Show failure breakdown
+    PD->>U: Display "Integration timeouts: 60%"
+    PD->>U: Display "Resource unavailable: 25%"
+    PD->>U: Display "Configuration errors: 15%"
+    
+    Note over U, PD: Performance trend analysis
+    U->>PD: View historical performance
+    PD->>AM: GET /api/analytics/historical-trends
+    AM->>PD: Return 30-day performance data
+    PD->>U: Show performance charts
+    PD->>U: Display success rate trend line
+    PD->>U: Display execution time improvements
+    PD->>U: Display automation rate growth
+    
+    Note over AM, PD: Automated performance reporting
+    AM->>AM: Generate daily performance report
+    AM->>AS: Log performance summary
+    AS->>PD: Update dashboard metrics
+    AM->>NS: Send performance digest to stakeholders
+    NS->>U: Email daily performance summary
+    
+    Note over U, PD: Performance optimization actions
+    U->>PD: Click "Optimize Processes"
+    PD->>PS: GET /api/processes/optimization-suggestions
+    PS->>AM: Analyze optimization opportunities
+    AM->>PS: Return optimization recommendations
+    PS->>PD: Optimization suggestions
+    PD->>U: Show optimization modal
+    PD->>U: Suggest "Increase timeout for integrations"
+    PD->>U: Suggest "Add retry logic for failed API calls"
+    PD->>U: Suggest "Enable parallel execution for independent tasks" 

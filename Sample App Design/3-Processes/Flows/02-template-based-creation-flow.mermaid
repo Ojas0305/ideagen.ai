@@ -1,0 +1,93 @@
+sequenceDiagram
+    participant U as User
+    participant PD as Processes Dashboard
+    participant PBM as Process Builder Modal
+    participant TS as Template Service
+    participant API as Backend API
+    participant IS as Integration Service
+    participant DB as Database
+
+    U->>PD: Access processes dashboard
+    PD->>U: Display existing processes and actions
+    
+    Note over U, PD: User chooses template-based creation
+    U->>PD: Click "Browse Templates"
+    PD->>PBM: Open Process Builder Modal
+    PBM->>U: Display "Process Templates" tab (active)
+    
+    Note over PBM: Load available templates
+    PBM->>TS: GET /api/templates/categories
+    TS->>PBM: Return template categories
+    PBM->>U: Show template categories (Marketing, Sales, Support)
+    
+    U->>PBM: Select "Marketing" category
+    PBM->>TS: GET /api/templates/marketing
+    TS->>PBM: Return marketing templates
+    PBM->>U: Display marketing template gallery
+    
+    Note over U, PBM: User selects template
+    PBM->>U: Show template cards with previews
+    U->>PBM: Click "Email Campaign Automation" template
+    PBM->>TS: GET /api/templates/{id}/details
+    TS->>PBM: Return template configuration
+    PBM->>U: Show template details modal
+    PBM->>U: Display template description and requirements
+    U->>PBM: Click "Use This Template"
+    
+    Note over PBM: Template customization
+    PBM->>PBM: Switch to "Process Details" tab
+    PBM->>U: Pre-populate form with template data
+    PBM->>U: Show editable fields with template defaults
+    
+    U->>PBM: Modify process name "Q1 Product Launch Campaign"
+    U->>PBM: Update description with custom content
+    U->>PBM: Keep department as "Marketing"
+    U->>PBM: Change priority to "High"
+    
+    Note over PBM: Integration inheritance
+    PBM->>IS: GET /api/integrations/template-requirements
+    IS->>PBM: Return required integrations from template
+    PBM->>U: Show pre-selected integrations
+    PBM->>U: Display template tools (Mailchimp, Canva, Analytics)
+    
+    U->>PBM: Add additional integration "HubSpot"
+    PBM->>IS: Check HubSpot connection status
+    IS->>PBM: Connection available
+    PBM->>U: Add HubSpot to selected tools
+    
+    Note over PBM: Template preview
+    U->>PBM: Click "Process Preview" tab
+    PBM->>TS: GET /api/templates/{id}/preview
+    TS->>PBM: Return template preview data
+    PBM->>U: Show customized process preview
+    PBM->>U: Display AI worker perspective with template context
+    
+    Note over PBM: Template validation
+    PBM->>API: POST /api/processes/validate-template
+    API->>TS: Validate template compatibility
+    TS->>API: Template validation successful
+    API->>IS: Verify all required integrations
+    IS->>API: All integrations available
+    API->>PBM: Template ready for deployment
+    
+    Note over PBM: Template deployment
+    U->>PBM: Click "Create from Template"
+    PBM->>API: POST /api/processes/create-from-template
+    API->>TS: Apply template configuration
+    TS->>API: Template applied with customizations
+    API->>DB: Save process with template metadata
+    DB->>API: Process created with template reference
+    API->>PBM: Process created successfully
+    
+    Note over PBM: Success feedback
+    PBM->>U: Show "Process created from template" success message
+    PBM->>PD: Close modal, refresh dashboard
+    PD->>API: GET /api/processes
+    API->>PD: Return updated process list
+    PD->>U: Show new process with "Template" badge
+    
+    Note over PD: Template usage tracking
+    PD->>TS: POST /api/templates/{id}/usage
+    TS->>TS: Increment template usage counter
+    PD->>U: Display updated process metrics
+    PD->>U: Show template-based process in recent activity 

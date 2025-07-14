@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chat-modal>
+    <!-- Modal Overlay -->
+    <modal_overlay>
+        <modal_container>
+            <!-- Modal Header -->
+            <modal_header>
+                <navigation>
+                    <close_button icon="close" action="close_modal">
+                        <tooltip>Close Chat</tooltip>
+                    </close_button>
+                </navigation>
+                <title_section>
+                    <main_title>Chat with Marketing Specialist</main_title>
+                    <subtitle>Start a conversation to get work done</subtitle>
+                </title_section>
+            </modal_header>
+
+            <!-- Main Chat Layout -->
+            <chat_layout>
+                <!-- Left Panel: Chat Conversation -->
+                <chat_panel>
+                    <!-- Chat Header -->
+                    <chat_header>
+                        <worker_info>
+                            <avatar>MS</avatar>
+                            <worker_details>
+                                <name>Marketing Specialist</name>
+                                <current_task>Weekly Newsletter Campaign Setup</current_task>
+                                <completion_status>73% complete</completion_status>
+                            </worker_details>
+                        </worker_info>
+
+                        <!-- Chat Actions -->
+                        <chat_actions>
+                            <button type="secondary" icon="add">
+                                <label>New</label>
+                                <action>new_conversation</action>
+                            </button>
+                            <button type="secondary" icon="save">
+                                <label>Save</label>
+                                <action>save_conversation</action>
+                            </button>
+                            <button type="secondary" icon="export">
+                                <label>Export</label>
+                                <action>export_conversation</action>
+                            </button>
+                        </chat_actions>
+                    </chat_header>
+
+                    <!-- SAMPLE DATA: Chat Conversation -->
+                    <chat_conversation>
+                        <!-- Task Started Message -->
+                        <message id="msg-001" type="system" timestamp="10:30 AM">
+                            <content>
+                                <title>Task started: Weekly Newsletter Campaign Setup</title>
+                                <author>Marketing Specialist</author>
+                            </content>
+                        </message>
+
+                        <!-- AI Worker Message 1 -->
+                        <message id="msg-002" type="ai_worker" timestamp="10:30 AM">
+                            <sender>
+                                <avatar>MS</avatar>
+                                <name>Marketing Specialist</name>
+                            </sender>
+                            <content>
+                                <text>Hey! 👋 I'm starting work on your newsletter campaign setup.
+                                    Let me break this down into manageable steps.</text>
+                            </content>
+                        </message>
+
+                        <!-- AI Worker Message 2 -->
+                        <message id="msg-003" type="ai_worker" timestamp="10:30 AM">
+                            <sender>
+                                <avatar>MS</avatar>
+                                <name>Marketing Specialist</name>
+                            </sender>
+                            <content>
+                                <text>✅ Got it! I can see this is for a weekly newsletter with
+                                    subscriber segmentation. Now let me connect to Mailchimp to see
+                                    what we're working with...</text>
+                            </content>
+                            <integration_action>
+                                <icon>mailchimp_logo</icon>
+                                <text>Mailchimp - Establishing API connection</text>
+                            </integration_action>
+                        </message>
+
+                        <!-- AI Worker Message 3 -->
+                        <message id="msg-004" type="ai_worker" timestamp="10:32 AM">
+                            <sender>
+                                <avatar>MS</avatar>
+                                <name>Marketing Specialist</name>
+                            </sender>
+                            <content>
+                                <text>📊 Wow, you have quite a subscriber base! Here's what I found:</text>
+                                <data_summary>
+                                    <item>📧 Total Active Subscribers: 12,347</item>
+                                    <item>👥 Enterprise Customers: 3,245 (26.3%)</item>
+                                    <item>🏢 Small Business: 6,843 (55.4%)</item>
+                                    <item>👤 Trial Users: 2,156 (17.5%)</item>
+                                    <item>📰 Newsletter Only: 2,654 (others)</item>
+                                </data_summary>
+                                <conclusion>This segmentation looks really good for targeted
+                                    campaigns!</conclusion>
+                            </content>
+                        </message>
+
+                        <!-- AI Worker Message 4 -->
+                        <message id="msg-005" type="ai_worker" timestamp="11:41 AM">
+                            <sender>
+                                <avatar>MS</avatar>
+                                <name>Marketing Specialist</name>
+                            </sender>
+                            <content>
+                                <text>🎯 Everything looks perfect! Your weekly newsletter system is
+                                    now live and ready to go!</text>
+
+                                <!-- Campaign Setup Summary -->
+                                <campaign_summary>
+                                    <title>📰 Campaign Setup Summary:</title>
+                                    <items>
+                                        <item status="completed">✅ 4 targeted campaigns for each
+                                            subscriber segment</item>
+                                        <item status="completed">✅ Email templates customized</item>
+                                        <item status="completed">✅ Subscriber lists organized</item>
+                                        <item status="completed">✅ Weekly automation (Fridays, 2:00
+                                            PM EST)</item>
+                                        <item status="completed">✅ Complete analytics tracking setup</item>
+                                    </items>
+                                    <success_note>✅ First newsletter sends this Friday!</success_note>
+                                </campaign_summary>
+
+                                <offer>Want me to send you a test email so you can see how it looks?
+                                    😊</offer>
+                            </content>
+                        </message>
+
+                        <!-- System Status Update -->
+                        <message id="msg-006" type="system" timestamp="11:41 AM">
+                            <content>
+                                <status_update>You</status_update>
+                                <action_suggestion>
+                                    <button type="primary">Create segment-specific variations</button>
+                                </action_suggestion>
+                            </content>
+                        </message>
+                    </chat_conversation>
+
+                    <!-- Chat Input Area -->
+                    <chat_input>
+                        <input_field>
+                            <placeholder>Type your message... (Shift+Enter for new line)</placeholder>
+                            <value></value>
+                        </input_field>
+                        <input_actions>
+                            <action type="attachment" icon="attach_file">Attach</action>
+                            <action type="link" icon="link">Link</action>
+                            <action type="emoji" icon="emoji_emotions">Emoji</action>
+                        </input_actions>
+                        <send_button type="primary" icon="send">
+                            <label>Send</label>
+                            <action>send_message</action>
+                        </send_button>
+                    </chat_input>
+
+                    <!-- Quick Actions -->
+                    <quick_actions>
+                        <suggestions>
+                            <suggestion>Show me the campaign preview</suggestion>
+                            <suggestion>Can you schedule a test send?</suggestion>
+                            <suggestion>How do I edit the content?</suggestion>
+                        </suggestions>
+                    </quick_actions>
+
+                    <!-- Chat Footer -->
+                    <chat_footer>
+                        <!-- Current Task Status -->
+                        <current_task_status>
+                            <task_name>Weekly Newsletter Campaign S</task_name>
+                            <cost>$3.20</cost>
+                            <status>Completed</status>
+                        </current_task_status>
+
+                        <!-- Footer Actions -->
+                        <footer_actions>
+                            <button type="secondary" icon="minimize">
+                                <label>Minimize</label>
+                                <action>minimize_chat</action>
+                            </button>
+                            <button type="secondary" icon="save">
+                                <label>Save &amp; Continue Later</label>
+                                <action>save_continue</action>
+                            </button>
+                            <button type="danger" icon="close">
+                                <label>End Chat</label>
+                                <action>end_chat</action>
+                            </button>
+                        </footer_actions>
+                    </chat_footer>
+                </chat_panel>
+
+                <!-- Right Panel: Active Tasks -->
+                <tasks_panel>
+                    <!-- Tasks Header -->
+                    <tasks_header>
+                        <title>Active Tasks</title>
+                        <subtitle>4 tasks in progress</subtitle>
+
+                        <new_task_button type="primary" icon="add">
+                            <label>New Task</label>
+                            <action>create_new_task</action>
+                        </new_task_button>
+                    </tasks_header>
+
+                    <!-- Task Management Controls -->
+                    <task_controls>
+                        <control_group>
+                            <control type="expandable" action="resume_selected">
+                                <icon>play_arrow</icon>
+                                <label>Resume Selected</label>
+                            </control>
+                            <control type="expandable" action="pause_selected">
+                                <icon>pause</icon>
+                                <label>Pause Selected</label>
+                            </control>
+                            <control type="expandable" action="terminate_selected">
+                                <icon>stop</icon>
+                                <label>Terminate Selected</label>
+                            </control>
+                        </control_group>
+                    </task_controls>
+
+                    <!-- SAMPLE DATA: Task Statistics -->
+                    <task_statistics>
+                        <stat_item>
+                            <value>3</value>
+                            <label>Total Active</label>
+                        </stat_item>
+                        <stat_item>
+                            <value>2</value>
+                            <label>Running</label>
+                        </stat_item>
+                        <stat_item>
+                            <value>1</value>
+                            <label>Paused</label>
+                        </stat_item>
+                        <stat_item>
+                            <value>5</value>
+                            <label>Completed Today</label>
+                        </stat_item>
+                        <stat_item>
+                            <value>0</value>
+                            <label>Failed</label>
+                        </stat_item>
+                    </task_statistics>
+
+                    <!-- Filter Controls -->
+                    <filter_controls>
+                        <filter type="dropdown" id="status">
+                            <label>All Status</label>
+                            <options>
+                                <option value="all">All Status</option>
+                                <option value="running">Running</option>
+                                <option value="paused">Paused</option>
+                                <option value="completed">Completed</option>
+                            </options>
+                        </filter>
+                        <filter type="dropdown" id="priority">
+                            <label>All Priority</label>
+                            <options>
+                                <option value="all">All Priority</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </options>
+                        </filter>
+                        <filter type="dropdown" id="workers">
+                            <label>All Workers</label>
+                            <options>
+                                <option value="all">All Workers</option>
+                                <option value="marketing">Marketing Specialist</option>
+                                <option value="content">Content Creator</option>
+                                <option value="social">Social Media Manager</option>
+                            </options>
+                        </filter>
+                    </filter_controls>
+
+                    <!-- SAMPLE DATA: Individual Task Cards -->
+                    <tasks_list>
+                        <!-- Completed Task -->
+                        <task_card id="task-001" status="completed">
+                            <task_header>
+                                <task_title>Weekly Newsletter Campaign Setup</task_title>
+                                <worker_info>
+                                    <worker_type>Marketing Specialist</worker_type>
+                                </worker_info>
+                            </task_header>
+
+                            <task_details>
+                                <duration>Duration: 12 minutes</duration>
+                                <cost>Cost: $3.20</cost>
+                                <status_badge type="completed">Completed</status_badge>
+                            </task_details>
+
+                            <task_tools>
+                                <tool>Mailchimp</tool>
+                                <tool>Canva</tool>
+                                <tool>Analytics</tool>
+                            </task_tools>
+
+                            <progress_bar>
+                                <percentage>100%</percentage>
+                                <bar_fill>100</bar_fill>
+                            </progress_bar>
+                        </task_card>
+
+                        <!-- In Progress Task -->
+                        <task_card id="task-002" status="in_progress">
+                            <task_header>
+                                <task_title>Social Media Performance Analysis</task_title>
+                                <worker_info>
+                                    <worker_type>Data Analyst</worker_type>
+                                </worker_info>
+                            </task_header>
+
+                            <task_details>
+                                <duration>67 minutes elapsed</duration>
+                                <estimated_cost>Est. cost: $8.50</estimated_cost>
+                                <status_badge type="in_progress">In Progress</status_badge>
+                            </task_details>
+
+                            <task_description>Generating engagement trend report</task_description>
+
+                            <progress_bar>
+                                <percentage>45%</percentage>
+                                <bar_fill>45</bar_fill>
+                            </progress_bar>
+                        </task_card>
+
+                        <!-- In Progress Task -->
+                        <task_card id="task-003" status="in_progress">
+                            <task_header>
+                                <task_title>Q1 Blog Content Strategy</task_title>
+                                <worker_info>
+                                    <worker_type>Content Creator</worker_type>
+                                </worker_info>
+                            </task_header>
+
+                            <task_details>
+                                <duration>2h 7m elapsed</duration>
+                                <estimated_cost>Est. cost: $15.75</estimated_cost>
+                                <status_badge type="in_progress">In Progress</status_badge>
+                            </task_details>
+
+                            <task_description>Writing "AI Trends in 2024" article</task_description>
+
+                            <progress_bar>
+                                <percentage>65%</percentage>
+                                <bar_fill>65</bar_fill>
+                            </progress_bar>
+                        </task_card>
+
+                        <!-- Waiting Input Task -->
+                        <task_card id="task-004" status="waiting_input">
+                            <task_header>
+                                <task_title>Lead Scoring Model Update</task_title>
+                                <worker_info>
+                                    <worker_type>Sales Specialist</worker_type>
+                                </worker_info>
+                            </task_header>
+
+                            <task_details>
+                                <duration>3h 21m elapsed</duration>
+                                <cost>Cost: $12.45</cost>
+                                <status_badge type="waiting_input">Waiting Input</status_badge>
+                            </task_details>
+
+                            <task_description>Waiting for lead scoring criteria approval</task_description>
+
+                            <progress_bar>
+                                <percentage>85%</percentage>
+                                <bar_fill>85</bar_fill>
+                            </progress_bar>
+                        </task_card>
+                    </tasks_list>
+
+                    <!-- Tasks Footer -->
+                    <tasks_footer>
+                        <cost_summary>
+                            <label>Total Daily Cost:</label>
+                            <amount>$51.50</amount>
+                        </cost_summary>
+                    </tasks_footer>
+                </tasks_panel>
+            </chat_layout>
+        </modal_container>
+    </modal_overlay>
+</chat-modal> 

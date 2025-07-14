@@ -1,0 +1,67 @@
+flowchart TD
+    A[User Login] --> B[Dashboard]
+    B --> C{New Project?}
+    C -->|Yes| D[Create Project]
+    C -->|No| E[Select Existing Project]
+    
+    D --> F[Project Setup]
+    E --> F
+    
+    F --> G[Define Challenge/Opportunity]
+    G --> H[Configure Data Sources]
+    H --> I[Select AI Personas]
+    I --> J[Review Configuration]
+    J --> K[Start Idea Session]
+    
+    K --> L[Data Retrieval Stage]
+    L --> M[AI Processing Stage]
+    M --> N[Seed Generation Stage]
+    N --> O[Multi-Persona Collaboration]
+    
+    O --> P[Review Generated Seeds]
+    P --> Q{Seeds Satisfactory?}
+    Q -->|No| R[Provide Feedback]
+    R --> O
+    Q -->|Yes| S[Select Best Seeds]
+    
+    S --> T[Full Idea Development]
+    T --> U[AI Expands Selected Seeds]
+    U --> V[Idea Validation & Scoring]
+    V --> W[Human Review & Refinement]
+    
+    W --> X{Ideas Ready?}
+    X -->|No| Y[Iterate & Improve]
+    Y --> U
+    X -->|Yes| Z[Export & Implementation]
+    
+    Z --> AA[Generate Reports]
+    AA --> BB[Create Presentations]
+    BB --> CC[Implementation Planning]
+    CC --> DD[Project Complete]
+    
+    %% Real-time feedback loops
+    L -.->|Status Updates| FF[Real-time Dashboard]
+    M -.->|Progress| FF
+    N -.->|Live Generation| FF
+    O -.->|Persona Chat| FF
+    T -.->|Development Status| FF
+    
+    %% Data flow
+    H --> EE[External APIs]
+    EE --> GG[Market Research]
+    EE --> HH[Competitor Analysis]
+    EE --> II[Social Media]
+    EE --> JJ[Industry Reports]
+    
+    %% Persona types
+    I --> KK[The Visionary]
+    I --> LL[The Analyst] 
+    I --> MM[The Critic]
+    I --> NN[The Customer Advocate]
+    I --> OO[Custom Personas]
+    
+    %% Export options
+    Z --> PP[PDF Reports]
+    Z --> QQ[PowerPoint Slides]
+    Z --> RR[Implementation Roadmap]
+    Z --> SS[API Integration] 

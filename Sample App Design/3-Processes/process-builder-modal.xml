@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<process-builder-modal>
+    <!-- Modal Overlay -->
+    <modal_overlay>
+        <modal_container>
+            <!-- Modal Header -->
+            <modal_header>
+                <navigation>
+                    <back_button icon="arrow_back" action="close_modal">
+                        <tooltip>Back to Processes</tooltip>
+                    </back_button>
+                </navigation>
+                <title_section>
+                    <main_title>Create New Process</main_title>
+                    <subtitle>Define a new automation process for your department</subtitle>
+                </title_section>
+            </modal_header>
+
+            <!-- Tab Navigation -->
+            <tab_navigation>
+                <tab id="process_details" active="true">
+                    <label>Process Details</label>
+                    <content_target>process_details_form</content_target>
+                </tab>
+                <tab id="process_preview">
+                    <label>Process Preview</label>
+                    <content_target>process_preview_panel</content_target>
+                </tab>
+                <tab id="process_templates">
+                    <label>Process Templates</label>
+                    <content_target>process_templates_gallery</content_target>
+                </tab>
+            </tab_navigation>
+
+            <!-- Main Content Area -->
+            <modal_content>
+                <!-- Left Panel: Process Configuration Form -->
+                <left_panel id="process_details_form">
+                    <!-- Basic Process Information -->
+                    <form_section id="basic_info">
+                        <!-- SAMPLE DATA: Process name input -->
+                        <form_field type="text" required="true">
+                            <label>Process Name *</label>
+                            <input>
+                                <placeholder>e.g., Weekly Newsletter Campaign</placeholder>
+                                <value>Weekly Newsletter Campaign</value>
+                                <validation>required</validation>
+                            </input>
+                        </form_field>
+
+                        <!-- SAMPLE DATA: Department selection -->
+                        <form_field type="dropdown" required="true">
+                            <label>Department *</label>
+                            <dropdown>
+                                <selected_value>Marketing</selected_value>
+                                <options>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="sales">Sales</option>
+                                    <option value="engineering">Engineering</option>
+                                    <option value="finance">Finance</option>
+                                    <option value="hr">Human Resources</option>
+                                    <option value="operations">Operations</option>
+                                </options>
+                            </dropdown>
+                        </form_field>
+
+                        <!-- SAMPLE DATA: Priority level selection -->
+                        <form_field type="dropdown" required="true">
+                            <label>Priority Level *</label>
+                            <dropdown>
+                                <selected_value>Medium</selected_value>
+                                <options>
+                                    <option value="low">Low</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </options>
+                            </dropdown>
+                        </form_field>
+
+                        <!-- SAMPLE DATA: Process description -->
+                        <form_field type="rich_text" required="true">
+                            <label>Process Description *</label>
+                            <rich_text_editor>
+                                <toolbar>
+                                    <tool type="bold" icon="format_bold">Bold</tool>
+                                    <tool type="italic" icon="format_italic">Italic</tool>
+                                    <tool type="underline" icon="format_underlined">Underline</tool>
+                                    <tool type="link" icon="link">Add Link</tool>
+                                </toolbar>
+                                <content_area>
+                                    <placeholder>Describe what this process should accomplish, step
+                                        by step.</placeholder>
+                                    <value></value>
+                                </content_area>
+                            </rich_text_editor>
+                        </form_field>
+                    </form_section>
+
+                    <!-- SAMPLE DATA: Required Integrations Section -->
+                    <form_section id="integrations">
+                        <section_header>
+                            <title>Required Integrations</title>
+                            <description>Select the tools this process will need to access</description>
+                        </section_header>
+
+                        <!-- Integration Categories -->
+                        <integration_categories>
+                            <!-- Communication & Email Category (Expanded) -->
+                            <category id="communication_email" expanded="true">
+                                <category_header>
+                                    <icon>email</icon>
+                                    <title>Communication &amp; Email</title>
+                                    <expand_icon>expand_less</expand_icon>
+                                </category_header>
+
+                                <integrations_list>
+                                    <integration id="mailchimp" status="connected">
+                                        <icon>mailchimp_logo</icon>
+                                        <name>Mailchimp</name>
+                                        <description>Email marketing automation</description>
+                                        <status_badge>Connected</status_badge>
+                                        <checkbox checked="true"></checkbox>
+                                    </integration>
+
+                                    <integration id="gmail" status="connected">
+                                        <icon>gmail_logo</icon>
+                                        <name>Gmail</name>
+                                        <description>Email management and sending</description>
+                                        <status_badge>Connected</status_badge>
+                                        <checkbox checked="true"></checkbox>
+                                    </integration>
+                                </integrations_list>
+                            </category>
+
+                            <!-- Design & Creative Category (Collapsed) -->
+                            <category id="design_creative" expanded="false">
+                                <category_header>
+                                    <icon>palette</icon>
+                                    <title>Design &amp; Creative</title>
+                                    <expand_icon>expand_more</expand_icon>
+                                </category_header>
+
+                                <integrations_list style="display:none">
+                                    <!-- Hidden when collapsed - sample data would include Canva,
+                                    Adobe Creative, etc. -->
+                                </integrations_list>
+                            </category>
+                        </integration_categories>
+
+                        <!-- Integration Summary -->
+                        <integration_summary>
+                            <selected_count>3 tools selected</selected_count>
+                            <total_available>12 total available</total_available>
+                        </integration_summary>
+
+                        <!-- Integration Actions -->
+                        <integration_actions>
+                            <button type="secondary" icon="add">
+                                <label>Browse More Integrations</label>
+                                <action>browse_integrations</action>
+                            </button>
+                            <button type="tertiary" icon="settings">
+                                <label>Configure Selected</label>
+                                <action>configure_integrations</action>
+                            </button>
+                        </integration_actions>
+                    </form_section>
+                </left_panel>
+
+                <!-- Right Panel: Process Preview -->
+                <right_panel id="process_preview_panel">
+                    <!-- SAMPLE DATA: Process preview card -->
+                    <preview_section>
+                        <preview_header>
+                            <process_title>Weekly Newsletter Campaign</process_title>
+                            <worker_badge>
+                                <icon>person</icon>
+                                <label>Marketing Specialist</label>
+                            </worker_badge>
+                        </preview_header>
+
+                        <!-- Selected Tools Display -->
+                        <selected_tools>
+                            <section_title>Selected Tools:</section_title>
+                            <tools_list>
+                                <tool id="mailchimp">
+                                    <name>Mailchimp</name>
+                                    <color>blue</color>
+                                </tool>
+                                <tool id="canva">
+                                    <name>Canva</name>
+                                    <color>purple</color>
+                                </tool>
+                                <tool id="google_analytics">
+                                    <name>Google Analytics</name>
+                                    <color>orange</color>
+                                </tool>
+                            </tools_list>
+                        </selected_tools>
+
+                        <!-- AI Worker Preview -->
+                        <ai_worker_preview>
+                            <section_title>How this appears to the AI Worker:</section_title>
+
+                            <worker_card>
+                                <card_header>
+                                    <process_name>Weekly Newsletter Campaign</process_name>
+                                    <specialist_badge>Marketing Specialist #2</specialist_badge>
+                                </card_header>
+
+                                <card_content>
+                                    <process_description>
+                                        <placeholder_text>Process description will appear here...</placeholder_text>
+                                    </process_description>
+                                </card_content>
+                            </worker_card>
+
+                            <!-- Available Tools Section -->
+                            <available_tools>
+                                <section_title>Available Tools:</section_title>
+                                <tools_grid>
+                                    <tool_item>
+                                        <name>Mailchimp</name>
+                                        <status>ready</status>
+                                    </tool_item>
+                                    <tool_item>
+                                        <name>Canva</name>
+                                        <status>ready</status>
+                                    </tool_item>
+                                    <tool_item>
+                                        <name>Analytics</name>
+                                        <status>ready</status>
+                                    </tool_item>
+                                </tools_grid>
+                            </available_tools>
+                        </ai_worker_preview>
+                    </preview_section>
+                </right_panel>
+            </modal_content>
+
+            <!-- Modal Footer Actions -->
+            <modal_footer>
+                <footer_actions>
+                    <button type="tertiary" action="cancel">
+                        <label>Cancel</label>
+                    </button>
+
+                    <button type="secondary" icon="save" action="save_draft">
+                        <label>Save Draft</label>
+                    </button>
+
+                    <button type="secondary" icon="play_arrow" action="test_process">
+                        <label>Test Process</label>
+                    </button>
+
+                    <button type="primary" icon="rocket_launch" action="save_deploy">
+                        <label>Save &amp; Deploy</label>
+                    </button>
+                </footer_actions>
+            </modal_footer>
+        </modal_container>
+    </modal_overlay>
+</process-builder-modal> 

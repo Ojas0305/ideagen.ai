@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<active_tasks_dashboard>
+    <!-- Top Navigation Bar -->
+    <top_navigation>
+        <left_section>
+            <company_logo>
+                <name>Oven AI</name>
+                <icon>oven_logo</icon>
+                <link>/dashboard</link>
+            </company_logo>
+        </left_section>
+        <right_section>
+            <!-- SAMPLE DATA: User profile information -->
+            <user_profile>
+                <avatar>user_avatar.jpg</avatar>
+                <name>John Smith</name>
+                <role>Executive</role>
+                <notifications_count>1</notifications_count>
+                <dropdown_menu>
+                    <item action="profile">My Profile</item>
+                    <item action="settings">Settings</item>
+                    <item action="help">Help &amp; Support</item>
+                    <item action="logout">Sign Out</item>
+                </dropdown_menu>
+            </user_profile>
+        </right_section>
+    </top_navigation>
+
+    <main_layout>
+        <!-- Left Sidebar Navigation -->
+        <left_sidebar>
+            <navigation_title>DASHBOARD</navigation_title>
+            <nav_items>
+                <nav_item id="overview" icon="dashboard">
+                    <label>Overview</label>
+                    <target_content>/overview</target_content>
+                </nav_item>
+                <nav_item id="organizations" icon="corporate_fare">
+                    <label>Organizations</label>
+                    <target_content>/organizations</target_content>
+                </nav_item>
+                <nav_item id="processes" icon="account_tree">
+                    <label>Processes</label>
+                    <target_content>/processes</target_content>
+                </nav_item>
+                <nav_item id="workers" icon="smart_toy">
+                    <label>Workers</label>
+                    <target_content>/workers</target_content>
+                </nav_item>
+                <nav_item id="integrations" icon="extension">
+                    <label>Integrations</label>
+                    <target_content>/integrations</target_content>
+                </nav_item>
+                <nav_item id="active_tasks" icon="task_alt" active="true">
+                    <label>Active Tasks</label>
+                    <target_content>/active-tasks</target_content>
+                </nav_item>
+                <nav_item id="knowledge_base" icon="storage">
+                    <label>Knowledge Base</label>
+                    <target_content>/knowledge-base</target_content>
+                </nav_item>
+            </nav_items>
+        </left_sidebar>
+
+        <!-- Main Content Area -->
+        <content_area>
+            <!-- Page Header -->
+            <header>
+                <page_info>
+                    <title>Executive Overview - Active Tasks</title>
+                    <!-- SAMPLE DATA: Organization and timestamp -->
+                    <organization>TechFlow Solutions</organization>
+                    <timestamp>Jan 15, 2024 10:30 AM</timestamp>
+                </page_info>
+            </header>
+
+            <!-- Key Performance Indicators -->
+            <kpi_section>
+                <!-- SAMPLE DATA: Task performance metrics -->
+                <kpi_cards>
+                    <kpi_card type="active_tasks">
+                        <value>42</value>
+                        <label>Active Tasks</label>
+                        <icon>activity</icon>
+                        <status>normal</status>
+                    </kpi_card>
+
+                    <kpi_card type="queued">
+                        <value>18</value>
+                        <label>Queued</label>
+                        <icon>clock</icon>
+                        <status>warning</status>
+                    </kpi_card>
+
+                    <kpi_card type="completed_today">
+                        <value>156</value>
+                        <label>Completed Today</label>
+                        <icon>check_circle</icon>
+                        <status>success</status>
+                    </kpi_card>
+
+                    <kpi_card type="failed">
+                        <value>3</value>
+                        <label>Failed</label>
+                        <icon>alert_triangle</icon>
+                        <status>error</status>
+                    </kpi_card>
+
+                    <kpi_card type="success_rate">
+                        <value>91%</value>
+                        <label>Success Rate</label>
+                        <icon>chart_line</icon>
+                        <status>success</status>
+                    </kpi_card>
+                </kpi_cards>
+            </kpi_section>
+
+            <!-- Main Content Layout -->
+            <content_layout>
+                <!-- Left Panel: Priority Distribution and Performance -->
+                <left_panel>
+                    <!-- Task Priority Distribution -->
+                    <priority_distribution_section>
+                        <section_title>Task Priority Distribution</section_title>
+
+                        <!-- SAMPLE DATA: Priority breakdown -->
+                        <priority_chart>
+                            <priority_item priority="high" color="red">
+                                <count>8</count>
+                                <percentage>19%</percentage>
+                                <label>High</label>
+                            </priority_item>
+                            <priority_item priority="medium" color="orange">
+                                <count>22</count>
+                                <percentage>52%</percentage>
+                                <label>Medium</label>
+                            </priority_item>
+                            <priority_item priority="low" color="green">
+                                <count>12</count>
+                                <percentage>29%</percentage>
+                                <label>Low</label>
+                            </priority_item>
+                        </priority_chart>
+                    </priority_distribution_section>
+
+                    <!-- Performance Metrics -->
+                    <performance_metrics_section>
+                        <section_title>Performance Metrics</section_title>
+
+                        <!-- SAMPLE DATA: Performance indicators -->
+                        <performance_metrics>
+                            <metric name="on_time_completion">
+                                <value>87%</value>
+                                <trend direction="up">+5%</trend>
+                                <label>On-Time Completion</label>
+                                <status>improving</status>
+                            </metric>
+                            <metric name="avg_task_duration">
+                                <value>2.3h</value>
+                                <trend direction="down">-18%</trend>
+                                <label>Avg Task Duration</label>
+                                <status>improving</status>
+                            </metric>
+                            <metric name="success_rate">
+                                <value>91%</value>
+                                <trend direction="neutral">0%</trend>
+                                <label>Success Rate</label>
+                                <status>stable</status>
+                            </metric>
+                        </performance_metrics>
+                    </performance_metrics_section>
+                </left_panel>
+
+                <!-- Right Panel: Active Tasks and Bottlenecks -->
+                <right_panel>
+                    <!-- Active Tasks Section -->
+                    <active_tasks_section>
+                        <section_header>
+                            <title>Active Tasks</title>
+                            <!-- SAMPLE DATA: Task count -->
+                            <subtitle>4 tasks in progress</subtitle>
+                        </section_header>
+
+                        <!-- Task Management Controls -->
+                        <task_controls>
+                            <primary_action>
+                                <button type="primary" action="new_task">
+                                    <icon>plus</icon>
+                                    <label>New Task</label>
+                                </button>
+                            </primary_action>
+
+                            <bulk_actions>
+                                <button type="secondary" action="resume_selected">
+                                    <icon>play</icon>
+                                    <label>Resume Selected</label>
+                                </button>
+                                <button type="secondary" action="pause_selected">
+                                    <icon>pause</icon>
+                                    <label>Pause Selected</label>
+                                </button>
+                                <button type="danger" action="terminate_selected">
+                                    <icon>stop</icon>
+                                    <label>Terminate Selected</label>
+                                </button>
+                            </bulk_actions>
+                        </task_controls>
+
+                        <!-- Task Status Summary -->
+                        <task_status_summary>
+                            <!-- SAMPLE DATA: Task status distribution -->
+                            <status_items>
+                                <status_item type="total_active" color="blue">
+                                    <count>3</count>
+                                    <label>Total Active</label>
+                                </status_item>
+                                <status_item type="running" color="green">
+                                    <count>2</count>
+                                    <label>Running</label>
+                                </status_item>
+                                <status_item type="paused" color="yellow">
+                                    <count>1</count>
+                                    <label>Paused</label>
+                                </status_item>
+                                <status_item type="completed_today" color="purple">
+                                    <count>5</count>
+                                    <label>Completed Today</label>
+                                </status_item>
+                                <status_item type="failed" color="red">
+                                    <count>0</count>
+                                    <label>Failed</label>
+                                </status_item>
+                            </status_items>
+                        </task_status_summary>
+
+                        <!-- Task Filters -->
+                        <task_filters>
+                            <filter_controls>
+                                <filter_dropdown id="status">
+                                    <label>All Status</label>
+                                    <selected_value>All Status</selected_value>
+                                    <options>
+                                        <option value="all" selected="true">All Status</option>
+                                        <option value="running">Running</option>
+                                        <option value="paused">Paused</option>
+                                        <option value="completed">Completed</option>
+                                        <option value="failed">Failed</option>
+                                    </options>
+                                </filter_dropdown>
+
+                                <filter_dropdown id="priority">
+                                    <label>All Priority</label>
+                                    <selected_value>All Priority</selected_value>
+                                    <options>
+                                        <option value="all" selected="true">All Priority</option>
+                                        <option value="high">High</option>
+                                        <option value="medium">Medium</option>
+                                        <option value="low">Low</option>
+                                    </options>
+                                </filter_dropdown>
+
+                                <filter_dropdown id="workers">
+                                    <label>All Workers</label>
+                                    <selected_value>All Workers</selected_value>
+                                    <options>
+                                        <option value="all" selected="true">All Workers</option>
+                                        <option value="marketing_specialist">Marketing Specialist</option>
+                                        <option value="data_analyst">Data Analyst</option>
+                                        <option value="content_creator">Content Creator</option>
+                                        <option value="sales_specialist">Sales Specialist</option>
+                                    </options>
+                                </filter_dropdown>
+                            </filter_controls>
+                        </task_filters>
+
+                        <!-- Task Cards List -->
+                        <task_list>
+                            <!-- SAMPLE DATA: Individual task cards -->
+
+                            <!-- Weekly Newsletter Campaign - Completed -->
+                            <task_card id="task_1" status="completed">
+                                <task_header>
+                                    <task_title>Weekly Newsletter Campaign Setup</task_title>
+                                    <status_badge type="completed">Completed</status_badge>
+                                </task_header>
+
+                                <task_details>
+                                    <assignee>
+                                        <worker_type>Marketing Specialist</worker_type>
+                                        <worker_avatar>marketing_specialist_avatar</worker_avatar>
+                                    </assignee>
+                                    <duration>12 minutes</duration>
+                                    <cost>$3.20</cost>
+                                </task_details>
+
+                                <task_integrations>
+                                    <integration_tags>
+                                        <tag type="email">Mailchimp</tag>
+                                        <tag type="design">Canva</tag>
+                                        <tag type="analytics">Analytics</tag>
+                                    </integration_tags>
+                                </task_integrations>
+
+                                <task_actions>
+                                    <action_button type="secondary">View Details</action_button>
+                                </task_actions>
+                            </task_card>
+
+                            <!-- Social Media Performance Analysis - In Progress -->
+                            <task_card id="task_2" status="in_progress">
+                                <task_header>
+                                    <task_title>Social Media Performance Analysis</task_title>
+                                    <status_badge type="in_progress">In Progress</status_badge>
+                                </task_header>
+
+                                <task_details>
+                                    <assignee>
+                                        <worker_type>Data Analyst</worker_type>
+                                        <worker_avatar>data_analyst_avatar</worker_avatar>
+                                    </assignee>
+                                    <duration>67 minutes elapsed</duration>
+                                    <estimated_completion>Est. cost: $8.90</estimated_completion>
+                                    <current_action>Generating engagement trend report</current_action>
+                                </task_details>
+
+                                <task_progress>
+                                    <progress_bar>
+                                        <percentage>65%</percentage>
+                                        <progress_fill>65</progress_fill>
+                                    </progress_bar>
+                                </task_progress>
+
+                                <task_actions>
+                                    <action_button type="secondary">View Progress</action_button>
+                                    <action_button type="tertiary" icon="pause">Pause</action_button>
+                                </task_actions>
+                            </task_card>
+
+                            <!-- Q1 Blog Content Strategy - In Progress -->
+                            <task_card id="task_3" status="in_progress">
+                                <task_header>
+                                    <task_title>Q1 Blog Content Strategy</task_title>
+                                    <status_badge type="in_progress">In Progress</status_badge>
+                                </task_header>
+
+                                <task_details>
+                                    <assignee>
+                                        <worker_type>Content Creator</worker_type>
+                                        <worker_avatar>content_creator_avatar</worker_avatar>
+                                    </assignee>
+                                    <duration>2h 12m elapsed</duration>
+                                    <estimated_completion>Est. cost: $15.75</estimated_completion>
+                                    <current_action>Writing "AI Trends in 2024" article</current_action>
+                                </task_details>
+
+                                <task_progress>
+                                    <progress_bar>
+                                        <percentage>78%</percentage>
+                                        <progress_fill>78</progress_fill>
+                                    </progress_bar>
+                                </task_progress>
+
+                                <task_actions>
+                                    <action_button type="secondary">View Progress</action_button>
+                                    <action_button type="tertiary" icon="pause">Pause</action_button>
+                                </task_actions>
+                            </task_card>
+
+                            <!-- Lead Scoring Model Update - Waiting Input -->
+                            <task_card id="task_4" status="waiting_input">
+                                <task_header>
+                                    <task_title>Lead Scoring Model Update</task_title>
+                                    <status_badge type="waiting_input">Waiting Input</status_badge>
+                                </task_header>
+
+                                <task_details>
+                                    <assignee>
+                                        <worker_type>Sales Specialist</worker_type>
+                                        <worker_avatar>sales_specialist_avatar</worker_avatar>
+                                    </assignee>
+                                    <duration>3h 27m elapsed</duration>
+                                    <cost>$12.40</cost>
+                                    <waiting_reason>Waiting for lead scoring criteria approval</waiting_reason>
+                                </task_details>
+
+                                <task_actions>
+                                    <action_button type="primary">Provide Input</action_button>
+                                    <action_button type="tertiary" icon="stop">Cancel</action_button>
+                                </task_actions>
+                            </task_card>
+                        </task_list>
+
+                        <!-- Task Summary -->
+                        <task_summary>
+                            <!-- SAMPLE DATA: Daily cost total -->
+                            <cost_summary>
+                                <label>Total Daily Cost:</label>
+                                <amount>$51.50</amount>
+                            </cost_summary>
+                        </task_summary>
+                    </active_tasks_section>
+
+                    <!-- Bottlenecks & Issues Section -->
+                    <bottlenecks_section>
+                        <section_title>Bottlenecks &amp; Issues</section_title>
+
+                        <!-- SAMPLE DATA: Current issues -->
+                        <issues_list>
+                            <!-- Marketing Department Issue -->
+                            <issue_card priority="high" department="Marketing">
+                                <issue_header>
+                                    <priority_badge type="high">High</priority_badge>
+                                    <department_label>Marketing</department_label>
+                                </issue_header>
+
+                                <issue_content>
+                                    <problem_description>Social Media Manager #1 overloaded with
+                                        content creation tasks</problem_description>
+                                    <impact_metric>3 tasks delayed by 1.5 days average</impact_metric>
+                                </issue_content>
+
+                                <issue_actions>
+                                    <action_button type="primary">Resolve</action_button>
+                                </issue_actions>
+                            </issue_card>
+
+                            <!-- Engineering Department Issue -->
+                            <issue_card priority="medium" department="Engineering">
+                                <issue_header>
+                                    <priority_badge type="medium">Medium</priority_badge>
+                                    <department_label>Engineering</department_label>
+                                </issue_header>
+
+                                <issue_content>
+                                    <problem_description>QA Automation #1 has limited availability
+                                        for testing tasks</problem_description>
+                                    <impact_metric>2 testing tasks queued for extended period</impact_metric>
+                                </issue_content>
+
+                                <issue_actions>
+                                    <action_button type="secondary">Investigate</action_button>
+                                </issue_actions>
+                            </issue_card>
+                        </issues_list>
+                    </bottlenecks_section>
+                </right_panel>
+            </content_layout>
+        </content_area>
+    </main_layout>
+</active_tasks_dashboard> 

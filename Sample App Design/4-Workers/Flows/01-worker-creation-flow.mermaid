@@ -1,0 +1,56 @@
+sequenceDiagram
+    participant U as User
+    participant WD as Workers Dashboard
+    participant CM as Configure Modal
+    participant API as Backend API
+    participant DB as Database
+    participant TS as Tool Services
+
+    U->>WD: View workers dashboard
+    WD->>U: Display current workers & metrics
+    
+    Note over U, WD: User decides to create new worker
+    U->>WD: Click "Add New Worker"
+    WD->>CM: Open configuration modal
+    
+    Note over CM: Step 1: Choose Specialist Type
+    CM->>U: Show specialist type options
+    U->>CM: Select specialist type (e.g., Marketing)
+    CM->>CM: Load default tools for selected type
+    
+    Note over CM: Step 2: Worker Details
+    CM->>U: Show worker details form
+    U->>CM: Enter worker name
+    U->>CM: Enter description
+    U->>CM: Select personality style
+    U->>CM: Select response speed
+    
+    Note over CM: Step 3: Configure Tools
+    CM->>U: Show tool categories
+    U->>CM: Select "Communication & Email" tab
+    CM->>U: Display available tools
+    
+    U->>CM: Toggle Mailchimp (connected)
+    U->>CM: Toggle HubSpot (connected)
+    U->>CM: Select Gmail (not connected)
+    CM->>TS: Initiate Gmail connection
+    TS->>U: OAuth flow for Gmail
+    U->>TS: Authorize Gmail access
+    TS->>CM: Connection confirmed
+    
+    U->>CM: Select additional tools
+    U->>CM: Click "Create Worker"
+    
+    CM->>API: POST /api/workers/create
+    Note over API: Validate configuration
+    API->>DB: Save worker configuration
+    API->>TS: Initialize tool connections
+    TS->>API: Confirm tool setup
+    API->>CM: Worker created successfully
+    
+    CM->>WD: Close modal, refresh dashboard
+    WD->>API: GET /api/workers
+    API->>WD: Return updated worker list
+    WD->>U: Show new worker in dashboard
+    
+    Note over U, WD: Worker appears in dashboard with "Idle" status 

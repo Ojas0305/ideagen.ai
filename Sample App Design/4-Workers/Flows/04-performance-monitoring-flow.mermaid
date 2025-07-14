@@ -1,0 +1,88 @@
+sequenceDiagram
+    participant U as User
+    participant WD as Workers Dashboard
+    participant AM as Analytics Module
+    participant API as Backend API
+    participant CHM as Chat Modal
+    participant W as AI Worker
+    participant TM as Task Manager
+
+    Note over U, WD: User monitors worker performance
+    U->>WD: Access workers dashboard
+    WD->>API: GET /api/metrics/overview
+    API->>AM: Calculate performance metrics
+    AM->>API: Return KPIs
+    API->>WD: Performance data
+    WD->>U: Display metrics (73% utilization, 87% efficiency)
+    
+    Note over U, WD: User reviews individual worker performance
+    WD->>U: Show worker cards with performance ratings
+    U->>WD: Notice underperforming worker (SEO Specialist - 0%)
+    WD->>U: Show "No active task" status
+    
+    Note over U, WD: Investigate underperformance
+    U->>WD: Click on SEO Specialist card
+    WD->>CHM: Open chat modal
+    CHM->>API: GET /api/workers/seo-specialist/status
+    API->>CHM: Return worker context
+    CHM->>U: Display idle worker interface
+    
+    Note over U, CHM: Diagnose worker status
+    U->>CHM: "Why aren't you working on anything?"
+    CHM->>W: Process inquiry
+    W->>TM: Check assigned tasks
+    TM->>W: No active tasks found
+    W->>CHM: "No active tasks assigned to me"
+    CHM->>U: Display response
+    
+    Note over U, CHM: Assign new task
+    U->>CHM: "Please audit our website SEO"
+    CHM->>W: Process task request
+    W->>TM: Create SEO audit task
+    TM->>API: POST /api/tasks/create
+    API->>TM: Task created
+    TM->>CHM: Update active tasks
+    CHM->>U: Show new task in progress
+    
+    Note over W, TM: Worker begins execution
+    W->>TM: Update task status to "Running"
+    TM->>AM: Log worker activity
+    AM->>WD: Update real-time metrics
+    
+    Note over U, WD: Monitor performance improvement
+    U->>CHM: Click "Save & Continue Later"
+    CHM->>WD: Return to dashboard
+    WD->>API: GET /api/metrics/current
+    API->>AM: Get updated metrics
+    AM->>API: Return refreshed data
+    API->>WD: Updated performance data
+    WD->>U: Show improved utilization (78% → 85%)
+    
+    Note over U, WD: Review overall performance trends
+    U->>WD: Review performance metrics section
+    WD->>U: Display trends (+5% utilization, +3% completion rate)
+    
+    Note over U, WD: Optimize worker allocation
+    U->>WD: Click "Bulk Assign Tasks"
+    WD->>U: Show bulk assignment interface
+    U->>WD: Select multiple idle workers
+    U->>WD: Assign tasks from queue
+    WD->>API: POST /api/tasks/bulk-assign
+    
+    loop For each selected worker
+        API->>TM: Assign task to worker
+        TM->>W: Send task assignment
+        W->>TM: Acknowledge assignment
+    end
+    
+    TM->>AM: Update worker utilization metrics
+    AM->>WD: Push metric updates
+    WD->>U: Show improved overall utilization
+    
+    Note over AM, WD: Continuous monitoring
+    AM->>AM: Calculate efficiency scores
+    AM->>WD: Update dashboard metrics every 30s
+    WD->>U: Show real-time performance updates
+    
+    Note over U, WD: Performance optimization completed
+    WD->>U: Display optimized metrics (91% utilization, 89% efficiency) 

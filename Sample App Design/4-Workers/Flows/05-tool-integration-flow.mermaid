@@ -1,0 +1,102 @@
+sequenceDiagram
+    participant U as User
+    participant CHM as Chat Modal
+    participant W as AI Worker
+    participant TS as Tool Services
+    participant MS as Mailchimp Service
+    participant HS as HubSpot Service
+    participant GS as Gmail Service
+    participant API as Backend API
+
+    Note over U, CHM: Worker needs to connect tools for task
+    U->>CHM: "Set up email marketing campaign"
+    CHM->>W: Process task request
+    W->>W: Analyze required tools
+    W->>CHM: "I'll need to connect to your email tools"
+    
+    Note over W, TS: Connect to Mailchimp
+    W->>TS: Request Mailchimp connection
+    TS->>MS: Check connection status
+    MS->>TS: Connection active
+    TS->>W: Mailchimp ready
+    W->>CHM: "✅ Connecting to Mailchimp..."
+    
+    Note over W, MS: Fetch subscriber data
+    W->>MS: GET /api/audiences
+    MS->>W: Return audience data
+    W->>MS: GET /api/audiences/{id}/members
+    MS->>W: Return subscriber list
+    W->>CHM: Display subscriber statistics
+    CHM->>U: Show "12,347 subscribers found"
+    
+    Note over W, TS: Connect to HubSpot
+    W->>TS: Request HubSpot connection
+    TS->>HS: Check connection status
+    HS->>TS: Connection active
+    TS->>W: HubSpot ready
+    W->>CHM: "✅ Connected to HubSpot"
+    
+    Note over W, HS: Get contact segmentation
+    W->>HS: GET /api/contacts/segments
+    HS->>W: Return segment data
+    W->>CHM: Display segmentation breakdown
+    CHM->>U: Show contact categories
+    
+    Note over W, TS: Attempt Gmail connection
+    W->>TS: Request Gmail connection
+    TS->>GS: Check OAuth status
+    GS->>TS: OAuth token expired
+    TS->>W: Gmail needs re-authorization
+    W->>CHM: "Gmail connection needed"
+    CHM->>U: Show OAuth prompt
+    
+    Note over U, GS: User authorizes Gmail
+    U->>GS: Click "Authorize Gmail"
+    GS->>U: OAuth consent screen
+    U->>GS: Grant permissions
+    GS->>TS: Return access token
+    TS->>W: Gmail connection established
+    W->>CHM: "✅ Gmail connected successfully"
+    
+    Note over W, TS: Execute cross-platform task
+    W->>MS: Create email campaign
+    MS->>W: Campaign created
+    W->>HS: Create contact workflow
+    HS->>W: Workflow created
+    W->>GS: Setup email forwarding
+    GS->>W: Forwarding configured
+    
+    Note over W, CHM: Report integration success
+    W->>CHM: "All tools integrated successfully"
+    W->>CHM: Display completion summary
+    CHM->>U: Show tool status indicators
+    
+    Note over W, API: Save integration state
+    W->>API: POST /api/workers/{id}/tools/status
+    API->>TS: Update tool connections
+    TS->>API: Confirm updates
+    API->>W: Integration state saved
+    
+    Note over TS, API: Monitor tool health
+    TS->>MS: Periodic health check
+    MS->>TS: Service healthy
+    TS->>HS: Periodic health check
+    HS->>TS: Service healthy
+    TS->>GS: Periodic health check
+    GS->>TS: Service healthy
+    TS->>API: All tools operational
+    
+    Note over W, CHM: Handle integration failure scenario
+    W->>TS: Request tool operation
+    TS->>MS: API call fails
+    MS-->>TS: Service unavailable
+    TS->>W: Tool error reported
+    W->>CHM: "Mailchimp temporarily unavailable"
+    CHM->>U: Show error with retry option
+    U->>CHM: Click "Retry"
+    CHM->>W: Retry request
+    W->>TS: Retry tool operation
+    TS->>MS: Retry API call
+    MS->>TS: Service restored
+    TS->>W: Operation successful
+    W->>CHM: "✅ Connection restored" 

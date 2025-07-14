@@ -1,0 +1,118 @@
+classDiagram
+    class Project {
+        String id
+        String name
+        String description
+        String industry
+        String challenge
+        DateTime createdAt
+        DateTime updatedAt
+        String status
+        User owner
+    }
+
+    class DataSource {
+        String id
+        String name
+        String type
+        String apiEndpoint
+        String credentials
+        DateTime lastSync
+        String status
+        Project project
+    }
+
+    class AIPersona {
+        String id
+        String name
+        String role
+        String systemPrompt
+        String expertise
+        String thinkingStyle
+        String personality
+        Project project
+    }
+
+    class IdeaSession {
+        String id
+        String name
+        String stage
+        DateTime startedAt
+        DateTime completedAt
+        String status
+        Project project
+        String configuration
+    }
+
+    class IdeaSeed {
+        String id
+        String title
+        String description
+        String category
+        Float confidenceScore
+        String generatedBy
+        DateTime createdAt
+        IdeaSession session
+    }
+
+    class FullIdea {
+        String id
+        String title
+        String description
+        String problem
+        String solution
+        String marketOpportunity
+        String targetAudience
+        String implementation
+        Float feasibilityScore
+        Float marketScore
+        Float uniquenessScore
+        Float overallScore
+        DateTime createdAt
+        IdeaSeed seed
+        IdeaSession session
+    }
+
+    class Evaluation {
+        String id
+        String type
+        String feedback
+        Float score
+        String criteria
+        String evaluatedBy
+        DateTime createdAt
+        FullIdea idea
+    }
+
+    class DataInsight {
+        String id
+        String source
+        String content
+        String category
+        String sentiment
+        Float relevance
+        DateTime extractedAt
+        DataSource dataSource
+        IdeaSession session
+    }
+
+    class User {
+        String id
+        String email
+        String name
+        String role
+        DateTime createdAt
+    }
+
+    %% Relationships
+    User ||--o{ Project : owns
+    Project ||--o{ DataSource : has
+    Project ||--o{ AIPersona : configures
+    Project ||--o{ IdeaSession : contains
+    IdeaSession ||--o{ IdeaSeed : generates
+    IdeaSeed ||--o{ FullIdea : develops
+    FullIdea ||--o{ Evaluation : receives
+    DataSource ||--o{ DataInsight : produces
+    IdeaSession ||--o{ DataInsight : uses
+    AIPersona ||--o{ IdeaSeed : creates
+    AIPersona ||--o{ FullIdea : expands 

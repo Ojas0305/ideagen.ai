@@ -1,0 +1,67 @@
+# Product Requirement Document - Oven AI
+
+
+### Entity Relationships
+
+```mermaid
+classDiagram
+    class Process {
+        String processName
+        String priorityLevel
+        String description
+        Integration[] integrations
+        Organization organization
+    }
+
+    class Integration {
+        String integrationName
+        String type
+        boolean isConnected
+    }
+
+    class Worker {
+        String workerName
+        String specialization
+        String description
+        String personalityStyle
+        String responseSpeed
+        Integration[] tools
+        Organization organization
+        Process[] attachedProcesses
+    }
+
+    class Task {
+        String taskName
+        String status
+        String priority
+        float estimatedCost
+        Worker assignedWorker
+        Process associatedProcess (optional)
+    }
+
+    class Organization {
+        String name
+        int activeTasks
+        int activeWorkers
+        float completionRate
+        Process[] processes
+        Worker[] workers
+    }
+
+    class KnowledgeBase {
+        String sourceType
+        String status
+        DateTime lastSync
+        Integration[] integrations
+    }
+
+    Organization "1" --> "*" Process
+    Organization "1" --> "*" Worker
+    Process "*" --> "*" Integration
+    Worker "*" --> "*" Integration
+    Worker "1" --> "*" Task
+    Worker "*" --> "*" Process : attached
+    Process "0..1" --> "*" Task : guides
+    KnowledgeBase "*" --> "*" Integration
+```
+

@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<organizations-dashboard>
+    <!-- Top Navigation Bar -->
+    <top_navigation>
+        <left_section>
+            <company_logo>
+                <name>Oven AI</name>
+                <icon>oven_logo</icon>
+                <link>/dashboard</link>
+            </company_logo>
+        </left_section>
+        <right_section>
+            <!-- SAMPLE DATA: User profile information -->
+            <user_profile>
+                <avatar>user_avatar.jpg</avatar>
+                <name>John Smith</name>
+                <role>Executive</role>
+                <notifications_count>3</notifications_count>
+                <dropdown_menu>
+                    <item action="profile">My Profile</item>
+                    <item action="settings">Settings</item>
+                    <item action="help">Help &amp; Support</item>
+                    <item action="logout">Sign Out</item>
+                </dropdown_menu>
+            </user_profile>
+        </right_section>
+    </top_navigation>
+
+    <main_layout>
+        <!-- Left Sidebar Navigation -->
+        <left_sidebar>
+            <navigation_title>DASHBOARD</navigation_title>
+            <nav_items>
+                <nav_item id="overview" icon="dashboard">
+                    <label>Overview</label>
+                    <target_content>/overview</target_content>
+                </nav_item>
+                <nav_item id="organizations" icon="corporate_fare" active="true">
+                    <label>Organizations</label>
+                    <target_content>/organizations</target_content>
+                </nav_item>
+                <nav_item id="processes" icon="account_tree">
+                    <label>Processes</label>
+                    <target_content>/processes</target_content>
+                </nav_item>
+                <nav_item id="workers" icon="smart_toy">
+                    <label>Workers</label>
+                    <target_content>/workers</target_content>
+                </nav_item>
+                <nav_item id="integrations" icon="extension">
+                    <label>Integrations</label>
+                    <target_content>/integrations</target_content>
+                </nav_item>
+                <nav_item id="active_tasks" icon="task_alt">
+                    <label>Active Tasks</label>
+                    <target_content>/active-tasks</target_content>
+                </nav_item>
+                <nav_item id="knowledge_base" icon="storage">
+                    <label>Knowledge Base</label>
+                    <target_content>/knowledge-base</target_content>
+                </nav_item>
+            </nav_items>
+        </left_sidebar>
+
+        <!-- Main Content Area -->
+        <content_area>
+            <!-- Header Section -->
+            <header>
+                <navigation>
+                    <breadcrumb>
+                        <item>Organizations</item>
+                    </breadcrumb>
+                    <!-- SAMPLE DATA: Company name and timestamp -->
+                    <company>TechFlow Solutions</company>
+                    <last-updated>Last updated: Jan 15, 2024 10:30 AM</last-updated>
+                </navigation>
+                <actions>
+                    <button type="primary">Add Organization</button>
+                    <button type="secondary">Import Organization</button>
+                </actions>
+            </header>
+
+            <!-- SAMPLE DATA: Top-level summary metrics -->
+            <summary-metrics>
+                <metric>
+                    <label>Total Departments</label>
+                    <value>4</value>
+                    <type>count</type>
+                </metric>
+                <metric>
+                    <label>Healthy</label>
+                    <value>3</value>
+                    <type>count</type>
+                    <status>positive</status>
+                </metric>
+                <metric>
+                    <label>Warning</label>
+                    <value>1</value>
+                    <type>count</type>
+                    <status>warning</status>
+                </metric>
+                <metric>
+                    <label>Avg Health Score</label>
+                    <value>84%</value>
+                    <type>percentage</type>
+                </metric>
+                <metric>
+                    <label>Active Tasks</label>
+                    <value>40</value>
+                    <type>count</type>
+                </metric>
+                <metric>
+                    <label>AI Workers</label>
+                    <value>11</value>
+                    <type>count</type>
+                </metric>
+            </summary-metrics>
+
+            <!-- Organization Cards Grid -->
+            <organizations-grid>
+                <!-- SAMPLE DATA: Engineering Organization -->
+                <organization id="engineering">
+                    <header>
+                        <icon type="code" />
+                        <title>Engineering</title>
+                        <health-status value="85%" status="healthy" />
+                        <actions>
+                            <button>Edit</button>
+                            <button>View Details</button>
+                            <button>More</button>
+                        </actions>
+                    </header>
+
+                    <!-- SAMPLE DATA: Engineering metrics -->
+                    <metrics>
+                        <metric>
+                            <label>Active Processes</label>
+                            <value>23</value>
+                        </metric>
+                        <metric>
+                            <label>Active Tasks</label>
+                            <value>12</value>
+                        </metric>
+                        <metric>
+                            <label>AI Workers</label>
+                            <value>3</value>
+                        </metric>
+                        <metric>
+                            <label>Completion Rate</label>
+                            <value>78%</value>
+                        </metric>
+                        <metric>
+                            <label>Automation Rate</label>
+                            <value>82%</value>
+                        </metric>
+                    </metrics>
+
+                    <!-- SAMPLE DATA: Engineering top processes -->
+                    <top-processes>
+                        <process>
+                            <name>API Integration Workflow</name>
+                            <usage>69%</usage>
+                            <success-rate>96%</success-rate>
+                        </process>
+                        <process>
+                            <name>Code Deployment Pipeline</name>
+                            <usage>76%</usage>
+                            <success-rate>98%</success-rate>
+                        </process>
+                        <process>
+                            <name>Bug Tracking Automation</name>
+                            <usage>45%</usage>
+                            <success-rate>87%</success-rate>
+                        </process>
+                    </top-processes>
+
+                    <!-- SAMPLE DATA: Engineering AI workers -->
+                    <ai-workers>
+                        <worker>
+                            <name>DevOps Specialist #1</name>
+                            <utilization>87%</utilization>
+                            <status>active</status>
+                        </worker>
+                        <worker>
+                            <name>Code Reviewer #1</name>
+                            <utilization>92%</utilization>
+                            <status>active</status>
+                        </worker>
+                        <worker>
+                            <name>QA Automation #1</name>
+                            <utilization>0%</utilization>
+                            <status>idle</status>
+                        </worker>
+                    </ai-workers>
+                </organization>
+
+                <!-- SAMPLE DATA: Sales Organization -->
+                <organization id="sales">
+                    <header>
+                        <icon type="trending-up" />
+                        <title>Sales</title>
+                        <health-status value="92%" status="healthy" />
+                        <actions>
+                            <button>Edit</button>
+                            <button>View Details</button>
+                            <button>More</button>
+                        </actions>
+                    </header>
+
+                    <!-- SAMPLE DATA: Sales metrics -->
+                    <metrics>
+                        <metric>
+                            <label>Active Processes</label>
+                            <value>18</value>
+                        </metric>
+                        <metric>
+                            <label>Active Tasks</label>
+                            <value>8</value>
+                        </metric>
+                        <metric>
+                            <label>AI Workers</label>
+                            <value>2</value>
+                        </metric>
+                        <metric>
+                            <label>Completion Rate</label>
+                            <value>94%</value>
+                        </metric>
+                        <metric>
+                            <label>Automation Rate</label>
+                            <value>89%</value>
+                        </metric>
+                    </metrics>
+
+                    <!-- SAMPLE DATA: Sales top processes -->
+                    <top-processes>
+                        <process>
+                            <name>Lead Qualification Process</name>
+                            <usage>92%</usage>
+                            <success-rate>86%</success-rate>
+                        </process>
+                        <process>
+                            <name>Proposal Generation</name>
+                            <usage>78%</usage>
+                            <success-rate>91%</success-rate>
+                        </process>
+                        <process>
+                            <name>CRM Data Sync</name>
+                            <usage>83%</usage>
+                            <success-rate>99%</success-rate>
+                        </process>
+                    </top-processes>
+
+                    <!-- SAMPLE DATA: Sales AI workers -->
+                    <ai-workers>
+                        <worker>
+                            <name>Lead Qualifier #1</name>
+                            <utilization>78%</utilization>
+                            <status>active</status>
+                        </worker>
+                        <worker>
+                            <name>CRM Manager #1</name>
+                            <utilization>65%</utilization>
+                            <status>active</status>
+                        </worker>
+                    </ai-workers>
+                </organization>
+
+                <!-- SAMPLE DATA: Marketing Organization -->
+                <organization id="marketing">
+                    <header>
+                        <icon type="megaphone" />
+                        <title>Marketing</title>
+                        <health-status value="71%" status="warning" />
+                        <actions>
+                            <button>Edit</button>
+                            <button>View Details</button>
+                            <button>More</button>
+                        </actions>
+                    </header>
+
+                    <!-- SAMPLE DATA: Marketing warning alert -->
+                    <alert type="warning">
+                        <message>Completion rate below target (67%)</message>
+                    </alert>
+
+                    <!-- SAMPLE DATA: Marketing metrics -->
+                    <metrics>
+                        <metric>
+                            <label>Active Processes</label>
+                            <value>27</value>
+                        </metric>
+                        <metric>
+                            <label>Active Tasks</label>
+                            <value>15</value>
+                        </metric>
+                        <metric>
+                            <label>AI Workers</label>
+                            <value>4</value>
+                        </metric>
+                        <metric>
+                            <label>Completion Rate</label>
+                            <value>67%</value>
+                        </metric>
+                        <metric>
+                            <label>Automation Rate</label>
+                            <value>74%</value>
+                        </metric>
+                    </metrics>
+
+                    <!-- SAMPLE DATA: Marketing improvement suggestions -->
+                    <improvement-suggestions>
+                        <suggestion priority="high">
+                            <description>Optimize social media posting process</description>
+                            <action>
+                                <button type="assign">Assign Task to Worker</button>
+                            </action>
+                        </suggestion>
+                        <suggestion priority="medium">
+                            <description>Review and update content creation templates</description>
+                            <action>
+                                <button type="assign">Assign Task to Worker</button>
+                            </action>
+                        </suggestion>
+                        <suggestion priority="low">
+                            <description>Implement automated performance monitoring</description>
+                            <action>
+                                <button type="assign">Assign Task to Worker</button>
+                            </action>
+                        </suggestion>
+                    </improvement-suggestions>
+                </organization>
+
+                <!-- SAMPLE DATA: Finance Organization -->
+                <organization id="finance">
+                    <header>
+                        <icon type="dollar-sign" />
+                        <title>Finance</title>
+                        <health-status value="88%" status="healthy" />
+                        <actions>
+                            <button>Edit</button>
+                            <button>View Details</button>
+                            <button>More</button>
+                        </actions>
+                    </header>
+
+                    <!-- SAMPLE DATA: Finance metrics -->
+                    <metrics>
+                        <metric>
+                            <label>Active Processes</label>
+                            <value>5</value>
+                        </metric>
+                        <metric>
+                            <label>Active Tasks</label>
+                            <value>2</value>
+                        </metric>
+                        <metric>
+                            <label>AI Workers</label>
+                            <value>2</value>
+                        </metric>
+                        <metric>
+                            <label>Completion Rate</label>
+                            <value>80%</value>
+                        </metric>
+                        <metric>
+                            <label>Automation Rate</label>
+                            <value>85%</value>
+                        </metric>
+                    </metrics>
+
+                    <!-- SAMPLE DATA: Finance top processes -->
+                    <top-processes>
+                        <process>
+                            <name>Invoice Processing</name>
+                            <usage>94%</usage>
+                            <success-rate>97%</success-rate>
+                        </process>
+                        <process>
+                            <name>Expense Report Automation</name>
+                            <usage>67%</usage>
+                            <success-rate>89%</success-rate>
+                        </process>
+                        <process>
+                            <name>Budget Analysis</name>
+                            <usage>45%</usage>
+                            <success-rate>93%</success-rate>
+                        </process>
+                    </top-processes>
+
+                    <!-- SAMPLE DATA: Finance AI workers -->
+                    <ai-workers>
+                        <worker>
+                            <name>Invoice Processor #1</name>
+                            <utilization>74%</utilization>
+                            <status>active</status>
+                        </worker>
+                        <worker>
+                            <name>Budget Analyst #1</name>
+                            <utilization>0%</utilization>
+                            <status>idle</status>
+                        </worker>
+                    </ai-workers>
+                </organization>
+            </organizations-grid>
+
+            <!-- SAMPLE DATA: Performance comparison charts -->
+            <performance-comparison>
+                <chart type="health-score">
+                    <title>Organization Performance Comparison</title>
+                    <subtitle>Health Score</subtitle>
+                    <data>
+                        <organization id="sales" value="92%" />
+                        <organization id="finance" value="88%" />
+                        <organization id="engineering" value="85%" />
+                        <organization id="marketing" value="71%" />
+                    </data>
+                </chart>
+
+                <chart type="completion-rate">
+                    <title>Completion Rate</title>
+                    <data>
+                        <organization id="sales" value="94%" />
+                        <organization id="finance" value="80%" />
+                        <organization id="engineering" value="78%" />
+                        <organization id="marketing" value="67%" />
+                    </data>
+                </chart>
+
+                <chart type="automation-rate">
+                    <title>Automation Rate</title>
+                    <data>
+                        <organization id="sales" value="89%" />
+                        <organization id="finance" value="85%" />
+                        <organization id="engineering" value="82%" />
+                        <organization id="marketing" value="74%" />
+                    </data>
+                </chart>
+            </performance-comparison>
+        </content_area>
+    </main_layout>
+</organizations-dashboard> 

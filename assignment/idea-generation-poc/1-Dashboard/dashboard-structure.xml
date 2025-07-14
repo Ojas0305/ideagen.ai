@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dashboard>
+    <!-- Top Navigation Bar -->
+    <top_navigation>
+        <left_section>
+            <company_logo>
+                <name>IdeaGen AI</name>
+                <icon>lightbulb_icon</icon>
+                <link>/dashboard</link>
+            </company_logo>
+        </left_section>
+        <center_section>
+            <search_bar>
+                <placeholder>Search projects, ideas, or data sources...</placeholder>
+                <search_icon>search</search_icon>
+                <filters>
+                    <filter type="project">Projects</filter>
+                    <filter type="idea">Ideas</filter>
+                    <filter type="data">Data Sources</filter>
+                </filters>
+            </search_bar>
+        </center_section>
+        <right_section>
+            <notifications>
+                <notification_icon>notifications</notification_icon>
+                <notification_count>5</notification_count>
+                <dropdown>
+                    <notification type="project_complete">
+                        <title>Project "Mobile App Ideas" completed</title>
+                        <time>2 hours ago</time>
+                    </notification>
+                    <notification type="idea_scored">
+                        <title>New high-scoring idea generated</title>
+                        <time>4 hours ago</time>
+                    </notification>
+                    <notification type="data_sync">
+                        <title>Market research data updated</title>
+                        <time>1 day ago</time>
+                    </notification>
+                </dropdown>
+            </notifications>
+            <user_profile>
+                <avatar>user_avatar.jpg</avatar>
+                <name>Sarah Johnson</name>
+                <role>Innovation Manager</role>
+                <dropdown_menu>
+                    <item action="profile">My Profile</item>
+                    <item action="settings">Settings</item>
+                    <item action="help">Help &amp; Support</item>
+                    <item action="logout">Sign Out</item>
+                </dropdown_menu>
+            </user_profile>
+        </right_section>
+    </top_navigation>
+
+    <main_layout>
+        <!-- Left Sidebar Navigation -->
+        <left_sidebar>
+            <navigation_title>IDEA GENERATION</navigation_title>
+            <nav_items>
+                <nav_item id="dashboard" icon="dashboard" active="true">
+                    <label>Dashboard</label>
+                    <target_content>/dashboard</target_content>
+                </nav_item>
+                <nav_item id="projects" icon="folder">
+                    <label>Projects</label>
+                    <target_content>/projects</target_content>
+                </nav_item>
+                <nav_item id="data-sources" icon="database">
+                    <label>Data Sources</label>
+                    <target_content>/data-sources</target_content>
+                </nav_item>
+                <nav_item id="ai-personas" icon="psychology">
+                    <label>AI Personas</label>
+                    <target_content>/ai-personas</target_content>
+                </nav_item>
+                <nav_item id="idea-workspace" icon="lightbulb">
+                    <label>Idea Workspace</label>
+                    <target_content>/idea-workspace</target_content>
+                </nav_item>
+                <nav_item id="evaluation" icon="assessment">
+                    <label>Evaluation</label>
+                    <target_content>/evaluation</target_content>
+                </nav_item>
+                <nav_item id="export" icon="file_download">
+                    <label>Export</label>
+                    <target_content>/export</target_content>
+                </nav_item>
+            </nav_items>
+        </left_sidebar>
+
+        <!-- Main Content Area -->
+        <main_content>
+            <!-- Dashboard Header -->
+            <dashboard_header>
+                <title>Innovation Dashboard</title>
+                <subtitle>Manage your AI-powered idea generation projects</subtitle>
+                <quick_actions>
+                    <action_button type="primary" action="new_project">
+                        <icon>add</icon>
+                        <label>New Project</label>
+                    </action_button>
+                    <action_button type="secondary" action="start_session">
+                        <icon>play_arrow</icon>
+                        <label>Start Session</label>
+                    </action_button>
+                    <action_button type="secondary" action="connect_data">
+                        <icon>link</icon>
+                        <label>Connect Data</label>
+                    </action_button>
+                    <action_button type="outline" action="review_ideas">
+                        <icon>rate_review</icon>
+                        <label>Review Ideas</label>
+                    </action_button>
+                </quick_actions>
+            </dashboard_header>
+
+            <!-- Key Performance Indicators -->
+            <kpi_section>
+                <kpi_card>
+                    <title>Active Projects</title>
+                    <value>12</value>
+                    <trend type="positive">+8%</trend>
+                    <icon>folder_open</icon>
+                    <description>Projects in progress</description>
+                </kpi_card>
+                <kpi_card>
+                    <title>Ideas Generated</title>
+                    <value>247</value>
+                    <trend type="positive">+23%</trend>
+                    <icon>lightbulb</icon>
+                    <description>Total ideas this month</description>
+                </kpi_card>
+                <kpi_card>
+                    <title>Success Rate</title>
+                    <value>76%</value>
+                    <trend type="positive">+5%</trend>
+                    <icon>trending_up</icon>
+                    <description>Ideas advancing to implementation</description>
+                </kpi_card>
+                <kpi_card>
+                    <title>Processing Time</title>
+                    <value>4.2h</value>
+                    <trend type="negative">-0.8h</trend>
+                    <icon>schedule</icon>
+                    <description>Average time to full ideas</description>
+                </kpi_card>
+            </kpi_section>
+
+            <!-- Main Dashboard Content -->
+            <dashboard_content>
+                <!-- Project Pipeline Overview -->
+                <pipeline_section>
+                    <section_header>
+                        <title>Project Pipeline</title>
+                        <subtitle>Overview of all active projects</subtitle>
+                        <actions>
+                            <action_button type="text" action="view_all">View All</action_button>
+                        </actions>
+                    </section_header>
+                    <pipeline_visualization>
+                        <stage name="planning">
+                            <title>Planning</title>
+                            <count>3</count>
+                            <projects>
+                                <project id="proj_001" name="Mobile App Innovations" />
+                                <project id="proj_002" name="E-commerce Enhancement" />
+                                <project id="proj_003" name="Supply Chain Optimization" />
+                            </projects>
+                        </stage>
+                        <stage name="processing">
+                            <title>Processing</title>
+                            <count>5</count>
+                            <projects>
+                                <project id="proj_004" name="Healthcare Solutions" />
+                                <project id="proj_005" name="Financial Services" />
+                                <project id="proj_006" name="EdTech Platform" />
+                                <project id="proj_007" name="Sustainability Initiatives" />
+                                <project id="proj_008" name="Customer Experience" />
+                            </projects>
+                        </stage>
+                        <stage name="generating">
+                            <title>Generating</title>
+                            <count>4</count>
+                            <projects>
+                                <project id="proj_009" name="AI Automation" />
+                                <project id="proj_010" name="Market Expansion" />
+                                <project id="proj_011" name="Product Innovation" />
+                                <project id="proj_012" name="Service Optimization" />
+                            </projects>
+                        </stage>
+                        <stage name="completed">
+                            <title>Completed</title>
+                            <count>8</count>
+                            <recent_completions>
+                                <completion date="2024-01-15">Social Media Strategy</completion>
+                                <completion date="2024-01-14">Manufacturing Efficiency</completion>
+                                <completion date="2024-01-13">Customer Retention</completion>
+                            </recent_completions>
+                        </stage>
+                    </pipeline_visualization>
+                </pipeline_section>
+
+                <!-- Recent Ideas Showcase -->
+                <ideas_section>
+                    <section_header>
+                        <title>Top Performing Ideas</title>
+                        <subtitle>Recently generated high-potential ideas</subtitle>
+                        <actions>
+                            <action_button type="text" action="view_all_ideas">View All Ideas</action_button>
+                        </actions>
+                    </section_header>
+                    <ideas_grid>
+                        <idea_card>
+                            <title>AI-Powered Customer Service Chatbot</title>
+                            <category>Customer Experience</category>
+                            <score>94</score>
+                            <metrics>
+                                <metric name="feasibility">92</metric>
+                                <metric name="market_potential">96</metric>
+                                <metric name="uniqueness">88</metric>
+                            </metrics>
+                            <generated_date>2024-01-15</generated_date>
+                            <actions>
+                                <action type="view">View Details</action>
+                                <action type="export">Export</action>
+                                <action type="implement">Start Implementation</action>
+                            </actions>
+                        </idea_card>
+                        <idea_card>
+                            <title>Sustainable Packaging Solution</title>
+                            <category>Sustainability</category>
+                            <score>89</score>
+                            <metrics>
+                                <metric name="feasibility">87</metric>
+                                <metric name="market_potential">91</metric>
+                                <metric name="uniqueness">85</metric>
+                            </metrics>
+                            <generated_date>2024-01-14</generated_date>
+                            <actions>
+                                <action type="view">View Details</action>
+                                <action type="export">Export</action>
+                                <action type="implement">Start Implementation</action>
+                            </actions>
+                        </idea_card>
+                        <idea_card>
+                            <title>Predictive Maintenance Platform</title>
+                            <category>Technology</category>
+                            <score>86</score>
+                            <metrics>
+                                <metric name="feasibility">88</metric>
+                                <metric name="market_potential">84</metric>
+                                <metric name="uniqueness">90</metric>
+                            </metrics>
+                            <generated_date>2024-01-13</generated_date>
+                            <actions>
+                                <action type="view">View Details</action>
+                                <action type="export">Export</action>
+                                <action type="implement">Start Implementation</action>
+                            </actions>
+                        </idea_card>
+                    </ideas_grid>
+                </ideas_section>
+
+                <!-- System Health & Resources -->
+                <system_health_section>
+                    <section_header>
+                        <title>System Health</title>
+                        <subtitle>AI personas and data sources status</subtitle>
+                    </section_header>
+                    <health_grid>
+                        <health_card type="ai_personas">
+                            <title>AI Personas</title>
+                            <status>Operational</status>
+                            <details>
+                                <detail>
+                                    <name>The Visionary</name>
+                                    <utilization>78%</utilization>
+                                    <response_time>1.2s</response_time>
+                                </detail>
+                                <detail>
+                                    <name>The Analyst</name>
+                                    <utilization>65%</utilization>
+                                    <response_time>0.9s</response_time>
+                                </detail>
+                                <detail>
+                                    <name>The Critic</name>
+                                    <utilization>45%</utilization>
+                                    <response_time>1.1s</response_time>
+                                </detail>
+                                <detail>
+                                    <name>Customer Advocate</name>
+                                    <utilization>52%</utilization>
+                                    <response_time>1.0s</response_time>
+                                </detail>
+                            </details>
+                        </health_card>
+                        <health_card type="data_sources">
+                            <title>Data Sources</title>
+                            <status>Healthy</status>
+                            <details>
+                                <detail>
+                                    <name>Market Research API</name>
+                                    <status>Connected</status>
+                                    <last_sync>2 hours ago</last_sync>
+                                </detail>
+                                <detail>
+                                    <name>Social Media Monitor</name>
+                                    <status>Connected</status>
+                                    <last_sync>1 hour ago</last_sync>
+                                </detail>
+                                <detail>
+                                    <name>Competitor Analysis</name>
+                                    <status>Connected</status>
+                                    <last_sync>3 hours ago</last_sync>
+                                </detail>
+                                <detail>
+                                    <name>Industry Reports</name>
+                                    <status>Syncing</status>
+                                    <last_sync>Syncing now</last_sync>
+                                </detail>
+                            </details>
+                        </health_card>
+                    </health_grid>
+                </system_health_section>
+
+                <!-- Recent Activity Feed -->
+                <activity_section>
+                    <section_header>
+                        <title>Recent Activity</title>
+                        <subtitle>Latest updates across all projects</subtitle>
+                    </section_header>
+                    <activity_feed>
+                        <activity_item>
+                            <timestamp>2 hours ago</timestamp>
+                            <user>Sarah Johnson</user>
+                            <action>completed idea generation</action>
+                            <project>Mobile App Innovations</project>
+                            <details>Generated 15 new ideas with average score of 82</details>
+                        </activity_item>
+                        <activity_item>
+                            <timestamp>4 hours ago</timestamp>
+                            <user>Mike Chen</user>
+                            <action>started new project</action>
+                            <project>Healthcare Solutions</project>
+                            <details>Configured 4 AI personas and 3 data sources</details>
+                        </activity_item>
+                        <activity_item>
+                            <timestamp>1 day ago</timestamp>
+                            <user>Emma Rodriguez</user>
+                            <action>exported ideas</action>
+                            <project>E-commerce Enhancement</project>
+                            <details>Exported 8 implementation-ready ideas to PowerPoint</details>
+                        </activity_item>
+                        <activity_item>
+                            <timestamp>2 days ago</timestamp>
+                            <user>David Kim</user>
+                            <action>configured data source</action>
+                            <project>Supply Chain Optimization</project>
+                            <details>Connected new industry report API</details>
+                        </activity_item>
+                    </activity_feed>
+                </activity_section>
+            </dashboard_content>
+        </main_content>
+    </main_layout>
+</dashboard> 

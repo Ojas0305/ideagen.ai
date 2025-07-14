@@ -1,0 +1,108 @@
+sequenceDiagram
+    participant U as User
+    participant PBM as Process Builder Modal
+    participant IS as Integration Service
+    participant MC as Mailchimp Service
+    participant CV as Canva Service
+    participant GA as Google Analytics
+    participant OAuth as OAuth Provider
+    participant API as Backend API
+
+    Note over U, PBM: User configuring process integrations
+    PBM->>U: Display integration categories
+    PBM->>IS: GET /api/integrations/categories
+    IS->>PBM: Return categorized integrations
+    PBM->>U: Show "Communication & Email" expanded
+    
+    Note over U, PBM: Configure existing connections
+    U->>PBM: Select Mailchimp checkbox
+    PBM->>IS: Check Mailchimp connection status
+    IS->>MC: Ping API endpoint
+    MC->>IS: Connection healthy
+    IS->>PBM: Mailchimp ready (connected)
+    PBM->>U: Show green "Connected" badge
+    
+    U->>PBM: Select Gmail checkbox
+    PBM->>IS: Check Gmail connection status
+    IS->>IS: Verify OAuth token validity
+    IS->>PBM: Gmail ready (connected)
+    PBM->>U: Show green "Connected" badge
+    
+    Note over U, PBM: Configure new integration
+    U->>PBM: Expand "Design & Creative" category
+    PBM->>U: Show design tools list
+    U->>PBM: Select Canva checkbox
+    PBM->>IS: Check Canva connection status
+    IS->>PBM: Canva not connected
+    PBM->>U: Show "Connect Required" status
+    
+    U->>PBM: Click "Connect Canva"
+    PBM->>IS: Initiate Canva OAuth flow
+    IS->>OAuth: GET /auth/canva/authorize
+    OAuth->>U: Redirect to Canva login
+    U->>OAuth: Enter Canva credentials
+    OAuth->>U: Show permission consent screen
+    U->>OAuth: Grant permissions
+    OAuth->>IS: Return authorization code
+    IS->>CV: POST /oauth/token (exchange code)
+    CV->>IS: Return access token
+    IS->>API: Save Canva connection
+    API->>IS: Connection saved
+    IS->>PBM: Canva connection established
+    PBM->>U: Update status to "Connected"
+    
+    Note over U, PBM: Test integration functionality
+    U->>PBM: Click "Configure Selected" button
+    PBM->>IS: GET /api/integrations/test-connections
+    
+    IS->>MC: Test API call (get audiences)
+    MC->>IS: Return audience list (success)
+    IS->>CV: Test API call (get templates)
+    CV->>IS: Return template list (success)
+    IS->>GA: Test API call (get properties)
+    GA-->>IS: Rate limit exceeded (error)
+    
+    IS->>PBM: Return test results
+    PBM->>U: Show connection test results
+    PBM->>U: Display "✅ Mailchimp: Connected"
+    PBM->>U: Display "✅ Canva: Connected"
+    PBM->>U: Display "⚠️ Google Analytics: Rate limited"
+    
+    Note over U, PBM: Handle connection issues
+    U->>PBM: Click "Retry Google Analytics"
+    PBM->>IS: Retry Google Analytics connection
+    IS->>GA: Wait for rate limit reset
+    IS->>GA: Retry API call
+    GA->>IS: Return analytics data (success)
+    IS->>PBM: Google Analytics connection restored
+    PBM->>U: Update status to "✅ Connected"
+    
+    Note over U, PBM: Integration permissions configuration
+    U->>PBM: Click "Advanced Configuration"
+    PBM->>IS: GET /api/integrations/{id}/permissions
+    IS->>PBM: Return available permissions
+    PBM->>U: Show permissions interface
+    
+    U->>PBM: Enable "Read campaigns" for Mailchimp
+    U->>PBM: Enable "Create designs" for Canva
+    U->>PBM: Enable "Read analytics" for Google Analytics
+    PBM->>IS: POST /api/integrations/permissions
+    IS->>API: Save permission configuration
+    API->>IS: Permissions saved
+    IS->>PBM: Configuration updated
+    
+    Note over PBM: Integration validation
+    PBM->>IS: Validate all selected integrations
+    IS->>IS: Check connection health
+    IS->>IS: Verify permissions scope
+    IS->>IS: Test API access levels
+    IS->>PBM: All integrations validated
+    PBM->>U: Show "3 tools configured successfully"
+    
+    Note over U, PBM: Save integration configuration
+    U->>PBM: Return to process details
+    PBM->>API: Save integration preferences
+    API->>IS: Store process-integration mapping
+    IS->>API: Mapping saved
+    API->>PBM: Integration configuration complete
+    PBM->>U: Update integration summary "3 tools selected" 
