@@ -88,8 +88,9 @@ export function NewProjectModal({ open, onOpenChange, onProjectCreated }: NewPro
                 const dataSourcesData = await dataSourcesResponse.json()
                 const aiPersonasData = await aiPersonasResponse.json()
 
-                setDataSources(dataSourcesData.data || [])
-                setAIPersonas(aiPersonasData.data || [])
+                // Fix API response structure mismatch
+                setDataSources(dataSourcesData.dataSources || [])
+                setAIPersonas(aiPersonasData.personas || [])
             }
         } catch (err) {
             console.error('Failed to fetch data:', err)

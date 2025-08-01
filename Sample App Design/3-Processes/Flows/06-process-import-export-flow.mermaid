@@ -54,10 +54,10 @@ sequenceDiagram
     IS->>IS: Check required vs available integrations
     IS->>PD: Return compatibility report
     PD->>U: Show integration status
-    PD->>U: Display "✅ Mailchimp - Available"
-    PD->>U: Display "✅ Canva - Available"
-    PD->>U: Display "⚠️ Adobe Creative - Not connected"
-    PD->>U: Display "❌ Salesforce - Not available"
+    PD->>U: Display " Mailchimp - Available"
+    PD->>U: Display " Canva - Available"
+    PD->>U: Display " Adobe Creative - Not connected"
+    PD->>U: Display " Salesforce - Not available"
     
     Note over U, PD: Handle missing integrations
     U->>PD: Click "Configure Missing Integrations"

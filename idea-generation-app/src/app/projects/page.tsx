@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Plus, Search, Filter, MoreHorizontal, Calendar, Users, TrendingUp } from 'lucide-react'
+import { Plus, Search, Filter, MoreHorizontal, Calendar, Users, TrendingUp, Loader2 } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 import { NewProjectModal } from '@/components/modals/NewProjectModal'
+import { useRouter } from 'next/navigation'
 
 interface ProjectCardProps {
     id: string
@@ -31,6 +32,9 @@ function ProjectCard({
     ideasGenerated,
     averageScore
 }: ProjectCardProps) {
+    const router = useRouter()
+    const [isCreatingSession, setIsCreatingSession] = useState(false)
+    
     const statusColors = {
         planning: 'bg-blue-100 text-blue-800',
         processing: 'bg-yellow-100 text-yellow-800',
@@ -45,6 +49,102 @@ function ProjectCard({
         generating: 'Generating',
         completed: 'Completed',
         paused: 'Paused'
+    }
+
+    const handleNewSession = async () => {
+        try {
+            setIsCreatingSession(true)
+            console.log(`Creating new idea generation session for project: ${name}`)
+            console.log(`Project ID: ${id}`)
+            
+            // Validate project ID
+            if (!id || id.trim() === '') {
+                throw new Error('Invalid project ID')
+            }
+            
+            // Step 1: Create new idea session with timeout
+            const sessionResponse = await Promise.race([
+                fetch('/api/idea-sessions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        project_id: id,
+                        name: `${name} - ${new Date().toLocaleString()}`
+                    })
+                }),
+                new Promise((_, reject) => 
+                    setTimeout(() => reject(new Error('Session creation timeout')), 10000)
+                )
+            ]) as Response
+
+            if (!sessionResponse.ok) {
+                const errorText = await sessionResponse.text()
+                let errorMessage = 'Failed to create session'
+                try {
+                    const errorData = JSON.parse(errorText)
+                    errorMessage = errorData.error?.message || errorMessage
+                } catch {
+                    errorMessage = `HTTP ${sessionResponse.status}: ${errorText}`
+                }
+                throw new Error(errorMessage)
+            }
+
+            const sessionData = await sessionResponse.json()
+            const sessionId = sessionData.id
+
+            console.log(` Session created: ${sessionId}`)
+
+            // Step 2: Start the idea generation pipeline asynchronously (fire and forget)
+            console.log(` Starting idea generation in background...`)
+            
+            // Start idea generation in background - don't wait for it
+            fetch('/api/idea-sessions/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    session_id: sessionId
+                })
+            }).then(response => {
+                if (response.ok) {
+                    console.log(` Background idea generation started successfully!`)
+                } else {
+                    console.warn(` Background idea generation may have issues, but session was created`)
+                }
+            }).catch(error => {
+                console.warn(` Background idea generation error:`, error)
+                console.log(` Session ${sessionId} was created successfully, you can check its progress in the workspace`)
+            })
+
+            console.log(` Navigating to workspace to monitor progress...`)
+            
+            // Step 3: Navigate immediately to idea workspace  
+            router.push('/idea-workspace')
+            
+        } catch (error) {
+            console.error(' Error creating session:', error)
+            
+            // Better error messaging for user
+            let userMessage = 'Failed to create session'
+            if (error instanceof Error) {
+                if (error.message.includes('timeout')) {
+                    userMessage = 'Session creation timed out. Please try again or check your internet connection.'
+                } else if (error.message.includes('uuid')) {
+                    userMessage = 'Invalid project configuration. Please try refreshing the page.'
+                } else if (error.message.includes('NetworkError') || error.message.includes('Failed to fetch')) {
+                    userMessage = 'Network connection issue. Please check your internet connection and try again.'
+                } else {
+                    userMessage = error.message
+                }
+            }
+            
+            alert(userMessage)
+        } finally {
+            setIsCreatingSession(false)
+        }
     }
 
     return (
@@ -64,7 +164,19 @@ function ProjectCard({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                         <DropdownMenuItem>View Details</DropdownMenuItem>
-                        <DropdownMenuItem>Start Session</DropdownMenuItem>
+                        <DropdownMenuItem onClick={handleNewSession} disabled={isCreatingSession}>
+                            {isCreatingSession ? (
+                                <>
+                                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                                    Creating Session...
+                                </>
+                            ) : (
+                                <>
+                                    <Plus className="mr-2 h-4 w-4" />
+                                    New Session
+                                </>
+                            )}
+                        </DropdownMenuItem>
                         <DropdownMenuItem>Edit Project</DropdownMenuItem>
                         <DropdownMenuItem className="text-red-600">Delete</DropdownMenuItem>
                     </DropdownMenuContent>
@@ -102,9 +214,23 @@ function ProjectCard({
                         <TrendingUp className="h-4 w-4 mr-2" />
                         View Analytics
                     </Button>
-                    <Button size="sm" className="flex-1">
-                        <Plus className="h-4 w-4 mr-2" />
-                        New Session
+                    <Button 
+                        size="sm" 
+                        className="flex-1" 
+                        onClick={handleNewSession}
+                        disabled={isCreatingSession}
+                    >
+                        {isCreatingSession ? (
+                            <>
+                                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                                Creating...
+                            </>
+                        ) : (
+                            <>
+                                <Plus className="h-4 w-4 mr-2" />
+                                New Session
+                            </>
+                        )}
                     </Button>
                 </div>
             </CardContent>

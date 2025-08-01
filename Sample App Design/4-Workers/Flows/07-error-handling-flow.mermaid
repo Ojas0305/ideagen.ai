@@ -21,7 +21,7 @@ sequenceDiagram
     TS-->>W: Connection timeout
     W->>ES: Log error event
     ES->>W: Return error handling strategy
-    W->>CHM: "❌ Unable to connect to social media tools"
+    W->>CHM: " Unable to connect to social media tools"
     CHM->>U: Show error message with options
     
     Note over U, CHM: User chooses retry
@@ -29,7 +29,7 @@ sequenceDiagram
     CHM->>W: Retry request
     W->>TS: Retry tool connection
     TS->>W: Connection successful
-    W->>CHM: "✅ Connection restored, continuing task"
+    W->>CHM: " Connection restored, continuing task"
     CHM->>U: Show success message
     
     Note over W, TM: Task execution failure
@@ -39,7 +39,7 @@ sequenceDiagram
     ES->>W: Suggest backoff strategy
     W->>TM: Update task status to "Delayed"
     TM->>CHM: Update task card status
-    W->>CHM: "⚠️ Rate limited, will retry in 15 minutes"
+    W->>CHM: " Rate limited, will retry in 15 minutes"
     CHM->>U: Show delay notification
     
     Note over ES, W: Automatic retry mechanism
@@ -49,7 +49,7 @@ sequenceDiagram
     TS->>W: Posting successful
     W->>TM: Update task status to "Running"
     TM->>CHM: Update task progress
-    W->>CHM: "✅ Task resumed successfully"
+    W->>CHM: " Task resumed successfully"
     
     Note over W, API: Critical system error
     W->>API: Save task progress
@@ -67,7 +67,7 @@ sequenceDiagram
     ES->>W: Resume normal operation
     W->>API: Retry failed operations
     API->>W: Operations successful
-    W->>CHM: "✅ System restored, tasks resumed"
+    W->>CHM: " System restored, tasks resumed"
     CHM->>U: Show recovery notification
     
     Note over U, CHM: User-initiated error resolution
@@ -86,7 +86,7 @@ sequenceDiagram
     W->>TM: Update task with corrections
     TM->>API: Save corrected task
     API->>TM: Corrections saved
-    W->>CHM: "✅ Recipient list cleaned, restarting campaign"
+    W->>CHM: " Recipient list cleaned, restarting campaign"
     
     Note over W, ES: Worker health monitoring
     ES->>W: Health check ping

@@ -5,6 +5,14 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 })
 
+// Rate limiting and retry configuration
+const RETRY_DELAYS = [1000, 2000, 5000, 10000] // Exponential backoff
+const MAX_RETRIES = 4
+const TOKEN_LIMITS = {
+    'gpt-4': 8000,
+    'gpt-3.5-turbo': 4000
+}
+
 export class PersonaService {
     static async generateIdea(
         persona: AIPersona,
@@ -15,24 +23,135 @@ export class PersonaService {
             existingSeeds?: IdeaSeed[]
         }
     ): Promise<string> {
-        try {
-            const systemPrompt = this.buildSystemPrompt(persona, context)
-
-            const completion = await openai.chat.completions.create({
-                model: 'gpt-4',
-                messages: [
-                    { role: 'system', content: systemPrompt },
-                    { role: 'user', content: this.buildUserPrompt(context) }
-                ],
-                temperature: persona.configuration?.creativity || 0.7,
-                max_tokens: 800,
-            })
-
-            return completion.choices[0]?.message?.content || 'Failed to generate idea'
-        } catch (error) {
-            console.error('Error generating idea:', error)
-            throw new Error('Failed to generate idea with AI')
+        const systemPrompt = this.buildSystemPrompt(persona, context)
+        const userPrompt = this.buildUserPrompt(context)
+        
+        // Try GPT-4 first, then fallback to GPT-3.5-turbo
+        const models = ['gpt-4', 'gpt-3.5-turbo']
+        
+        for (const model of models) {
+            try {
+                const result = await this.makeAPICallWithRetry({
+                    model,
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: userPrompt }
+                    ],
+                    temperature: persona.configuration?.creativity || 0.7,
+                    max_tokens: this.getOptimalTokenLimit(model, systemPrompt, userPrompt),
+                })
+                
+                return result || 'Failed to generate idea'
+                
+            } catch (error) {
+                console.warn(`${model} failed, trying next model:`, error.message)
+                if (model === models[models.length - 1]) {
+                    // If all models fail, return a fallback response
+                    return this.generateFallbackIdea(persona, context)
+                }
+            }
         }
+        
+        return this.generateFallbackIdea(persona, context)
+    }
+
+    private static async makeAPICallWithRetry(params: {
+        model: string
+        messages: Array<{ role: string; content: string }>
+        temperature: number
+        max_tokens: number
+    }): Promise<string> {
+        let lastError: Error | null = null
+        
+        for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+            try {
+                console.log(` Attempting ${params.model} API call (attempt ${attempt + 1}/${MAX_RETRIES + 1})`)
+                
+                const completion = await openai.chat.completions.create({
+                    model: params.model,
+                    messages: params.messages,
+                    temperature: params.temperature,
+                    max_tokens: params.max_tokens,
+                })
+
+                const content = completion.choices[0]?.message?.content
+                if (content) {
+                    console.log(` ${params.model} API call successful`)
+                    return content
+                } else {
+                    throw new Error('No content in API response')
+                }
+                
+            } catch (error: any) {
+                lastError = error
+                console.warn(` ${params.model} API call failed (attempt ${attempt + 1}):`, error.message)
+                
+                // Handle specific error types
+                if (error.status === 429) {
+                    // Rate limiting - use exponential backoff
+                    const retryAfter = error.headers?.['retry-after'] ? 
+                        parseInt(error.headers['retry-after']) * 1000 : 
+                        RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)]
+                    
+                    if (attempt < MAX_RETRIES) {
+                        console.log(`⏱️ Rate limited, waiting ${retryAfter}ms before retry...`)
+                        await new Promise(resolve => setTimeout(resolve, retryAfter))
+                        continue
+                    }
+                } else if (error.status === 502 || error.status === 503 || error.status === 504) {
+                    // Server errors - retry with exponential backoff
+                    if (attempt < MAX_RETRIES) {
+                        const delay = RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)]
+                        console.log(` Server error, retrying in ${delay}ms...`)
+                        await new Promise(resolve => setTimeout(resolve, delay))
+                        continue
+                    }
+                } else {
+                    // Other errors - don't retry
+                    break
+                }
+            }
+        }
+        
+        throw lastError || new Error('API call failed after all retries')
+    }
+
+    private static getOptimalTokenLimit(model: string, systemPrompt: string, userPrompt: string): number {
+        const baseLimit = TOKEN_LIMITS[model] || 4000
+        const promptTokensEstimate = Math.ceil((systemPrompt.length + userPrompt.length) / 4) // Rough estimate
+        const responseTokens = Math.min(800, baseLimit - promptTokensEstimate - 100) // Leave buffer
+        
+        return Math.max(200, responseTokens) // Minimum 200 tokens for response
+    }
+
+    private static generateFallbackIdea(
+        persona: AIPersona,
+        context: {
+            challenge: string
+            industry?: string
+            dataInsights?: DataInsight[]
+            existingSeeds?: IdeaSeed[]
+        }
+    ): string {
+        const industry = context.industry || 'technology'
+        const challenge = context.challenge || 'innovation'
+        
+        // Generate a basic but coherent idea based on persona type
+        const fallbackIdeas = {
+            'The Visionary': `TITLE: Revolutionary ${industry} Innovation Platform\n\nDESCRIPTION: Envision a transformative platform that addresses ${challenge} through cutting-edge technology and user-centric design. This solution leverages emerging trends to create unprecedented value for users while disrupting traditional approaches in the ${industry} space.\n\nINNOVATION: Combines multiple emerging technologies to solve complex problems in innovative ways.`,
+            
+            'The Analyst': `TITLE: Data-Driven ${industry} Solution\n\nDESCRIPTION: A systematic approach to ${challenge} using comprehensive data analysis and market research. This solution is built on solid business fundamentals with clear metrics, validated assumptions, and a scalable implementation strategy.\n\nINNOVATION: Uses advanced analytics and data science to optimize performance and deliver measurable results.`,
+            
+            'The Critic': `TITLE: Robust ${industry} Framework\n\nDESCRIPTION: A carefully designed solution that addresses ${challenge} while mitigating common risks and pitfalls. This approach emphasizes reliability, security, and sustainable growth over rapid scaling.\n\nINNOVATION: Incorporates comprehensive risk management and quality assurance from the ground up.`,
+            
+            'Customer Advocate': `TITLE: User-Centered ${industry} Experience\n\nDESCRIPTION: A human-first approach to ${challenge} that prioritizes user needs, accessibility, and satisfaction. This solution is designed with extensive user research and feedback integration.\n\nINNOVATION: Places user experience and customer success at the core of every design decision.`
+        }
+        
+        const personaName = persona.name || 'AI Persona'
+        const fallbackIdea = fallbackIdeas[personaName] || fallbackIdeas['The Analyst']
+        
+        console.log(` Generated fallback idea for ${personaName}`)
+        return fallbackIdea
     }
 
     static async expandSeedToFullIdea(

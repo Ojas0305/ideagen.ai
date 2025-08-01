@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 import { Plus, Play, Link as LinkIcon, Star, TrendingUp, Clock, Folder, FolderOpen } from 'lucide-react'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Button } from '@/components/ui/button'
@@ -134,6 +135,7 @@ function IdeaCard({ title, category, score, metrics, generated_date }: IdeaCardP
 }
 
 export default function DashboardPage() {
+    const router = useRouter()
     const [kpis, setKpis] = useState({
         activeProjects: { value: 0, trend: '0%', type: 'positive' as const },
         ideasGenerated: { value: 0, trend: '0%', type: 'positive' as const },
@@ -190,6 +192,21 @@ export default function DashboardPage() {
         fetchAnalytics()
     }, [])
 
+    const handleStartSession = () => {
+        // Navigate to idea workspace to start a new session
+        router.push('/idea-workspace')
+    }
+
+    const handleConnectData = () => {
+        // Navigate to data sources page
+        router.push('/data-sources')
+    }
+
+    const handleReviewIdeas = () => {
+        // Navigate to evaluation page
+        router.push('/evaluation')
+    }
+
     return (
         <DashboardLayout>
             <div className="space-y-6">
@@ -236,15 +253,15 @@ export default function DashboardPage() {
                             <Plus className="h-4 w-4 mr-2" />
                             New Project
                         </Button>
-                        <Button variant="outline">
+                        <Button variant="outline" onClick={handleStartSession}>
                             <Play className="h-4 w-4 mr-2" />
                             Start Session
                         </Button>
-                        <Button variant="outline">
+                        <Button variant="outline" onClick={handleConnectData}>
                             <LinkIcon className="h-4 w-4 mr-2" />
                             Connect Data
                         </Button>
-                        <Button variant="ghost">
+                        <Button variant="ghost" onClick={handleReviewIdeas}>
                             <Star className="h-4 w-4 mr-2" />
                             Review Ideas
                         </Button>

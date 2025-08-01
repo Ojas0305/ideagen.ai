@@ -21,7 +21,7 @@ sequenceDiagram
     WS->>WM: Check worker capacity and availability
     WM->>WS: Return availability status
     WS->>PBM: Marketing specialist available
-    PBM->>U: Show "✅ Marketing Specialist - Available"
+    PBM->>U: Show " Marketing Specialist - Available"
     
     Note over PBM: Process deployment with worker assignment
     U->>PBM: Click "Create Process"
@@ -69,7 +69,7 @@ sequenceDiagram
     WS->>PS: Mark process as completed
     PS->>API: Update process metrics
     API->>PD: Process completion notification
-    PD->>U: Show "✅ Newsletter Campaign completed"
+    PD->>U: Show " Newsletter Campaign completed"
     
     Note over U, PD: Worker performance tracking
     PD->>WS: GET /api/workers/performance-metrics
@@ -120,7 +120,7 @@ sequenceDiagram
     WM->>NS: Trigger capacity alert
     NS->>U: Send notification "Marketing workers at capacity"
     NS->>PD: Show capacity warning
-    PD->>U: Display "⚠️ Consider adding more marketing workers"
+    PD->>U: Display " Consider adding more marketing workers"
     
     Note over U, PD: Worker scaling recommendation
     U->>PD: Click on capacity warning

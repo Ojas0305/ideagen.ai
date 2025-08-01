@@ -58,14 +58,14 @@ NEXT_PUBLIC_APP_NAME="IdeaGen AI"
 
 ## Features to Test
 
-### Phase 1 - Database & Auth (✅ Ready)
+### Phase 1 - Database & Auth ( Ready)
 
 - [x] User registration and login
 - [x] Project creation and management
 - [x] AI personas configuration
 - [x] Data sources setup
 
-### Phase 2 - AI Integration (🔄 Next)
+### Phase 2 - AI Integration ( Next)
 
 - [ ] Real OpenAI API calls for persona conversations
 - [ ] Idea generation pipeline with real AI

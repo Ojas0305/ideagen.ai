@@ -19,7 +19,7 @@ sequenceDiagram
     TS->>MS: Check connection status
     MS->>TS: Connection active
     TS->>W: Mailchimp ready
-    W->>CHM: "✅ Connecting to Mailchimp..."
+    W->>CHM: " Connecting to Mailchimp..."
     
     Note over W, MS: Fetch subscriber data
     W->>MS: GET /api/audiences
@@ -34,7 +34,7 @@ sequenceDiagram
     TS->>HS: Check connection status
     HS->>TS: Connection active
     TS->>W: HubSpot ready
-    W->>CHM: "✅ Connected to HubSpot"
+    W->>CHM: " Connected to HubSpot"
     
     Note over W, HS: Get contact segmentation
     W->>HS: GET /api/contacts/segments
@@ -56,7 +56,7 @@ sequenceDiagram
     U->>GS: Grant permissions
     GS->>TS: Return access token
     TS->>W: Gmail connection established
-    W->>CHM: "✅ Gmail connected successfully"
+    W->>CHM: " Gmail connected successfully"
     
     Note over W, TS: Execute cross-platform task
     W->>MS: Create email campaign
@@ -99,4 +99,4 @@ sequenceDiagram
     TS->>MS: Retry API call
     MS->>TS: Service restored
     TS->>W: Operation successful
-    W->>CHM: "✅ Connection restored" 
+    W->>CHM: " Connection restored" 

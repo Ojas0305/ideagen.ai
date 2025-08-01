@@ -64,9 +64,9 @@ sequenceDiagram
     
     IS->>PBM: Return test results
     PBM->>U: Show connection test results
-    PBM->>U: Display "✅ Mailchimp: Connected"
-    PBM->>U: Display "✅ Canva: Connected"
-    PBM->>U: Display "⚠️ Google Analytics: Rate limited"
+    PBM->>U: Display " Mailchimp: Connected"
+    PBM->>U: Display " Canva: Connected"
+    PBM->>U: Display " Google Analytics: Rate limited"
     
     Note over U, PBM: Handle connection issues
     U->>PBM: Click "Retry Google Analytics"
@@ -75,7 +75,7 @@ sequenceDiagram
     IS->>GA: Retry API call
     GA->>IS: Return analytics data (success)
     IS->>PBM: Google Analytics connection restored
-    PBM->>U: Update status to "✅ Connected"
+    PBM->>U: Update status to " Connected"
     
     Note over U, PBM: Integration permissions configuration
     U->>PBM: Click "Advanced Configuration"

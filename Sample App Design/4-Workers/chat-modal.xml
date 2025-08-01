@@ -77,7 +77,7 @@
                                 <name>Marketing Specialist</name>
                             </sender>
                             <content>
-                                <text>✅ Got it! I can see this is for a weekly newsletter with
+                                <text> Got it! I can see this is for a weekly newsletter with
                                     subscriber segmentation. Now let me connect to Mailchimp to see
                                     what we're working with...</text>
                             </content>
@@ -94,13 +94,13 @@
                                 <name>Marketing Specialist</name>
                             </sender>
                             <content>
-                                <text>📊 Wow, you have quite a subscriber base! Here's what I found:</text>
+                                <text> Wow, you have quite a subscriber base! Here's what I found:</text>
                                 <data_summary>
-                                    <item>📧 Total Active Subscribers: 12,347</item>
-                                    <item>👥 Enterprise Customers: 3,245 (26.3%)</item>
-                                    <item>🏢 Small Business: 6,843 (55.4%)</item>
-                                    <item>👤 Trial Users: 2,156 (17.5%)</item>
-                                    <item>📰 Newsletter Only: 2,654 (others)</item>
+                                    <item> Total Active Subscribers: 12,347</item>
+                                    <item> Enterprise Customers: 3,245 (26.3%)</item>
+                                    <item>Small Business: 6,843 (55.4%)</item>
+                                    <item> Trial Users: 2,156 (17.5%)</item>
+                                    <item> Newsletter Only: 2,654 (others)</item>
                                 </data_summary>
                                 <conclusion>This segmentation looks really good for targeted
                                     campaigns!</conclusion>
@@ -114,22 +114,22 @@
                                 <name>Marketing Specialist</name>
                             </sender>
                             <content>
-                                <text>🎯 Everything looks perfect! Your weekly newsletter system is
+                                <text> Everything looks perfect! Your weekly newsletter system is
                                     now live and ready to go!</text>
 
                                 <!-- Campaign Setup Summary -->
                                 <campaign_summary>
-                                    <title>📰 Campaign Setup Summary:</title>
+                                    <title> Campaign Setup Summary:</title>
                                     <items>
-                                        <item status="completed">✅ 4 targeted campaigns for each
+                                        <item status="completed"> 4 targeted campaigns for each
                                             subscriber segment</item>
-                                        <item status="completed">✅ Email templates customized</item>
-                                        <item status="completed">✅ Subscriber lists organized</item>
-                                        <item status="completed">✅ Weekly automation (Fridays, 2:00
+                                        <item status="completed"> Email templates customized</item>
+                                        <item status="completed"> Subscriber lists organized</item>
+                                        <item status="completed"> Weekly automation (Fridays, 2:00
                                             PM EST)</item>
-                                        <item status="completed">✅ Complete analytics tracking setup</item>
+                                        <item status="completed"> Complete analytics tracking setup</item>
                                     </items>
-                                    <success_note>✅ First newsletter sends this Friday!</success_note>
+                                    <success_note> First newsletter sends this Friday!</success_note>
                                 </campaign_summary>
 
                                 <offer>Want me to send you a test email so you can see how it looks?
