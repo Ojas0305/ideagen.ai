@@ -2,6 +2,26 @@
 
 A multi-persona AI brainstorming tool. Instead of asking one chatbot for one generic answer, IdeaGen AI runs four AI personas, each with a distinct personality, that research a problem, propose competing business ideas, and then debate them in a simulated group discussion before you pick a winner.
 
+## Screenshots
+
+**Dashboard:** KPIs, project pipeline, and idea counts at a glance.
+![Dashboard](docs/screenshots/dashboard.png)
+
+**Idea Workspace:** a completed generation pipeline, from data retrieval through seed generation, full development, and persona discussion.
+![Idea Workspace](docs/screenshots/idea-workspace.png)
+
+**AI Personas:** the four personas with their configured personality traits and expertise.
+![AI Personas](docs/screenshots/ai-personas.png)
+
+**Data Sources:** live connection status for each external API.
+![Data Sources](docs/screenshots/data-sources.png)
+
+**Evaluation:** generated ideas ranked by score, with feasibility, market potential, and uniqueness broken out.
+![Evaluation](docs/screenshots/evaluation.png)
+
+**Projects:** every project with its idea count and average score rolled up.
+![Projects](docs/screenshots/projects.png)
+
 ## How it works
 
 You describe a company, an industry, and a problem you're trying to solve. From there, the app:
@@ -27,8 +47,10 @@ Each persona's creativity level, risk tolerance, and expertise are configurable 
 ## App pages
 
 - **Dashboard**: KPIs (active projects, ideas generated, success rate), a pipeline view of projects by stage, and health status of the AI personas and data connectors.
+- **Projects**: every project with its idea count and average score, filterable by status and industry.
 - **Data Sources**: shows which external APIs are configured, with a live test button to preview the data they'd return.
 - **AI Personas**: screen for creating and editing personas (prompt, personality, expertise).
+- **Idea Workspace**: run a new session and watch the generation pipeline (data retrieval, seed generation, full development, persona discussion) progress in real time.
 - **Evaluation**: generated ideas ranked by score, plus a manual entry mode to score your own idea.
 - **Export**: planned, not yet built.
 

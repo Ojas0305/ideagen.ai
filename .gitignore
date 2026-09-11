@@ -1,6 +1,13 @@
 # Cursor IDE config (contains local tooling/credentials, not part of the app)
 .cursor/
 
+# Playwright MCP debug output (screenshots/snapshots taken during manual testing)
+.playwright-mcp/
+
+# Local dev server logs
+idea-generation-app/dev-server.log
+idea-generation-app/dev-server-error.log
+
 # Unedited create-next-app boilerplate, superseded by the root README
 /idea-generation-app/README.md
 
