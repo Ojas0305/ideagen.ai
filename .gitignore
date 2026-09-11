@@ -1,7 +1,7 @@
 # Cursor IDE config (contains local tooling/credentials, not part of the app)
 .cursor/
 
-# Saved definition of a removed demo persona, kept locally only, not part of the app
+# Local notes, not part of the app
 /explorer/
 
 # Playwright MCP debug output (screenshots/snapshots taken during manual testing)
