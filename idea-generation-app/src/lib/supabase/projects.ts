@@ -1,4 +1,4 @@
-import { createServerSupabaseClient } from './client'
+import { createAdminSupabaseClient } from './client'
 import { Project, CreateProjectForm, ApiResponse, PaginatedResponse } from '@/lib/types'
 
 export class ProjectsService {
@@ -6,7 +6,7 @@ export class ProjectsService {
 
     static async createProject(data: CreateProjectForm): Promise<ApiResponse<Project>> {
         try {
-            const supabase = await createServerSupabaseClient()
+            const supabase = createAdminSupabaseClient()
 
             const { data: project, error } = await supabase
                 .from('projects')
@@ -40,7 +40,7 @@ export class ProjectsService {
         } = {}
     ): Promise<ApiResponse<PaginatedResponse<Project>>> {
         try {
-            const supabase = await createServerSupabaseClient()
+            const supabase = createAdminSupabaseClient()
 
             // Simplified query without complex relationships
             let query = supabase
@@ -94,7 +94,7 @@ export class ProjectsService {
 
     static async getProjectById(projectId: string): Promise<ApiResponse<Project>> {
         try {
-            const supabase = await createServerSupabaseClient()
+            const supabase = createAdminSupabaseClient()
 
             const { data: project, error } = await supabase
                 .from('projects')
@@ -118,7 +118,7 @@ export class ProjectsService {
         updates: Partial<Project>
     ): Promise<ApiResponse<Project>> {
         try {
-            const supabase = await createServerSupabaseClient()
+            const supabase = createAdminSupabaseClient()
 
             const { data: project, error } = await supabase
                 .from('projects')
@@ -140,7 +140,7 @@ export class ProjectsService {
 
     static async deleteProject(projectId: string): Promise<ApiResponse<void>> {
         try {
-            const supabase = await createServerSupabaseClient()
+            const supabase = createAdminSupabaseClient()
 
             const { error } = await supabase
                 .from('projects')

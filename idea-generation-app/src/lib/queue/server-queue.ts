@@ -351,7 +351,7 @@ export class ServerQueue {
       await supabase
         .from('idea_sessions')
         .update({ 
-          status: 'collaborating',
+          status: 'generating',
           statistics: { stage: 'persona_collaboration', progress: 80 }
         })
         .eq('id', sessionId)
@@ -432,7 +432,7 @@ export class ServerQueue {
       await supabase
         .from('idea_sessions')
         .update({ 
-          status: 'failed',
+          status: 'paused',
           statistics: { stage: 'failed', progress: 0, error: error instanceof Error ? error.message : 'Unknown error' }
         })
         .eq('id', sessionId)

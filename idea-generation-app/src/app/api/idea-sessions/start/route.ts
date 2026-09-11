@@ -151,11 +151,11 @@ export async function POST(request: NextRequest) {
 
         console.log(`Starting automated idea generation for session ${session_id}`)
 
-        // Update session status to starting
+        // Update session status to processing (align with DB constraint)
         await supabase
             .from('idea_sessions')
             .update({ 
-                status: 'starting',
+                status: 'processing',
                 statistics: {
                     stage: 'starting',
                     progress: 0,
