@@ -1,0 +1,17 @@
+# Cursor IDE config (contains local tooling/credentials, not part of the app)
+.cursor/
+
+# Unedited create-next-app boilerplate, superseded by the root README
+/idea-generation-app/README.md
+
+# Scratch work / unrelated leftovers, not part of the app (real app is in idea-generation-app/)
+/my-app/
+/src/
+/Sample App Design/
+/basic-test.js
+/debug-regex.js
+/fix-specific-idea.js
+/test-fixed-regex.js
+/test-parsing-fix-new.js
+/test_scripts.md
+/TODO.md
