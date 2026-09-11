@@ -277,8 +277,8 @@ export default function ProjectsPage() {
                 industry: project.industry,
                 status: project.status,
                 created_at: project.created_at,
-                ideasGenerated: 0, // TODO: Calculate from sessions/ideas
-                averageScore: 0    // TODO: Calculate from ideas
+                ideasGenerated: project.ideas_count || 0,
+                averageScore: project.average_score || 0
             })) || []
             
             setProjects(transformedProjects)

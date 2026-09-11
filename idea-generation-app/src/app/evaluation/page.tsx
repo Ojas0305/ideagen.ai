@@ -2,10 +2,18 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Plus, Trash2, Loader2 } from 'lucide-react'
+import ReactMarkdown from 'react-markdown'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { NewIdeaModal } from '@/components/modals/NewIdeaModal'
+
+// The AI response is a single blob formatted as "TITLE: ...\n\nDESCRIPTION: ...",
+// and title extraction upstream doesn't strip that label. Clean it up for display
+// rather than touching the fragile upstream parsing.
+function cleanIdeaTitle(title: string): string {
+    return title.replace(/^\s*TITLE:\s*/i, '').trim() || title
+}
 
 interface Idea {
     id: string
@@ -27,7 +35,7 @@ export default function EvaluationPage() {
     const [evaluationData, setEvaluationData] = useState<EvaluationData | null>(null)
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState<string | null>(null)
-    const [sessionId, setSessionId] = useState<string>('199e6ec6-0e1b-495c-aa87-bccb26eb8ea3') // Test session ID
+    const [sessionId, setSessionId] = useState<string>('')
     const [showNewIdeaModal, setShowNewIdeaModal] = useState(false)
     const [deletingIdeaId, setDeletingIdeaId] = useState<string | null>(null)
     const [evaluatingIdeas, setEvaluatingIdeas] = useState<Set<string>>(new Set())
@@ -56,6 +64,24 @@ export default function EvaluationPage() {
             fetchEvaluationData()
         }
     }, [sessionId])
+
+    // Default to the most recently created session instead of a fixed ID
+    useEffect(() => {
+        const fetchLatestSession = async () => {
+            try {
+                const response = await fetch('/api/idea-sessions?limit=1')
+                if (response.ok) {
+                    const data = await response.json()
+                    if (data.sessions?.[0]?.id) {
+                        setSessionId(data.sessions[0].id)
+                    }
+                }
+            } catch (err) {
+                console.error('Failed to fetch latest session:', err)
+            }
+        }
+        fetchLatestSession()
+    }, [])
 
     // Polling for ideas being evaluated
     useEffect(() => {
@@ -284,8 +310,10 @@ export default function EvaluationPage() {
                                     <div key={idea.id} className={`border rounded-lg p-4 ${isEvaluating ? 'bg-blue-50 border-blue-200' : ''}`}>
                                         <div className="flex justify-between items-start mb-2">
                                             <div className="flex-1">
-                                                <h3 className="font-semibold text-lg">{idea.title}</h3>
-                                                <p className="text-gray-600 text-sm">{idea.description}</p>
+                                                <h3 className="font-semibold text-lg">{cleanIdeaTitle(idea.title)}</h3>
+                                                <div className="text-gray-600 text-sm prose prose-sm max-w-none [&_p]:my-1">
+                                                    <ReactMarkdown>{idea.description}</ReactMarkdown>
+                                                </div>
                                             </div>
                                             <div className="flex items-center space-x-3">
                                                 <div className="text-right">

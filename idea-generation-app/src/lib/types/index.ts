@@ -24,6 +24,8 @@ export interface Project {
     dataSources?: DataSource[]
     aiPersonas?: AIPersona[]
     sessions?: IdeaSession[]
+    ideas_count?: number
+    average_score?: number
 }
 
 export interface DataSource {
