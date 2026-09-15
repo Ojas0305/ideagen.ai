@@ -88,6 +88,7 @@ See [`idea-generation-app/SETUP.md`](idea-generation-app/SETUP.md) for full data
 ```
 idea-generation-app/   # the actual application (Next.js)
 assignment/            # early planning docs: architecture, API spec, DB schema
+docs/screenshots/      # screenshots used in this README
 ```
 
 ## Known limitations
