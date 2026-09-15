@@ -75,17 +75,34 @@ async function getRealDataSourcesStatus() {
         name: 'NewsData.io',
         type: 'industry_reports' as const,
         api_endpoint: 'https://newsdata.io/api/1/news',
-        status: process.env.NEWSDATA_API_KEY ? 'connected' : 'disconnected' as const,
+        status: process.env.NEWS_DATA_API_KEY ? 'connected' : 'disconnected' as const,
         last_sync: new Date().toISOString(),
         records_collected: 14,
         data_quality: 95,
         configuration: {
-          api_key_configured: !!process.env.NEWSDATA_API_KEY,
+          api_key_configured: !!process.env.NEWS_DATA_API_KEY,
           categories: ['business', 'technology'],
           languages: ['en']
         },
-        credentials: { 
-          api_key: process.env.NEWSDATA_API_KEY ? '****' + process.env.NEWSDATA_API_KEY.slice(-4) : null 
+        credentials: {
+          api_key: process.env.NEWS_DATA_API_KEY ? '****' + process.env.NEWS_DATA_API_KEY.slice(-4) : null
+        }
+      },
+      {
+        id: 'mediastack',
+        name: 'Mediastack',
+        type: 'industry_reports' as const,
+        api_endpoint: 'https://api.mediastack.com/v1/news',
+        status: process.env.MEDIASTACK_API_KEY ? 'connected' : 'disconnected' as const,
+        last_sync: new Date().toISOString(),
+        records_collected: 0,
+        data_quality: 85,
+        configuration: {
+          api_key_configured: !!process.env.MEDIASTACK_API_KEY,
+          categories: ['business', 'technology']
+        },
+        credentials: {
+          api_key: process.env.MEDIASTACK_API_KEY ? '****' + process.env.MEDIASTACK_API_KEY.slice(-4) : null
         }
       },
       {
@@ -120,8 +137,25 @@ async function getRealDataSourcesStatus() {
           endpoints: ['price', 'profile'],
           rate_limit: '5 calls/minute (free plan)'
         },
-        credentials: { 
-          api_key: process.env.TWELVE_DATA_API_KEY ? '****' + process.env.TWELVE_DATA_API_KEY.slice(-4) : null 
+        credentials: {
+          api_key: process.env.TWELVE_DATA_API_KEY ? '****' + process.env.TWELVE_DATA_API_KEY.slice(-4) : null
+        }
+      },
+      {
+        id: 'apify',
+        name: 'Apify',
+        type: 'market_research' as const,
+        api_endpoint: 'https://api.apify.com/v2',
+        status: process.env.APIFY_TOKEN ? 'connected' : 'disconnected' as const,
+        last_sync: new Date().toISOString(),
+        records_collected: 0,
+        data_quality: 80,
+        configuration: {
+          api_key_configured: !!process.env.APIFY_TOKEN,
+          used_for: 'Additional web-scraped market data'
+        },
+        credentials: {
+          api_key: process.env.APIFY_TOKEN ? '****' + process.env.APIFY_TOKEN.slice(-4) : null
         }
       },
       {
