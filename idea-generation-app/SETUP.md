@@ -1,122 +1,45 @@
-# Setup Instructions for IdeaGen AI
+# Setup
 
 ## Prerequisites
 
-1. **Supabase Account**: Create a free account at [supabase.com](https://supabase.com)
-2. **OpenAI API Key**: Get your API key from [platform.openai.com](https://platform.openai.com)
+- A free [Supabase](https://supabase.com) account
+- An [OpenAI](https://platform.openai.com) API key
 
-## Database Setup
+## Database
 
-### 1. Create Supabase Project
+1. Create a new Supabase project and wait for it to finish provisioning.
+2. Open the project's SQL Editor.
+3. Run each file in `supabase/migrations/` in order, pasting the contents and executing one at a time:
+   - `001_create_basic_tables.sql`: core tables (projects, personas, data sources, sessions, ideas) and the four default AI personas
+   - `002_remove_auth.sql`: this app has no authentication; this migration opens up table access accordingly
+   - `003_add_evaluation_columns.sql`: scoring columns (feasibility, market potential, uniqueness) and the problem/solution/market/audience/implementation fields
+   - `004_add_persona_conversations.sql`: persona discussion threads
+   - `005_add_persona_id_to_ideas.sql`: links each idea back to the persona that generated it
 
-1. Go to [supabase.com/dashboard](https://supabase.com/dashboard)
-2. Click "New Project"
-3. Choose your organization and enter project details
-4. Wait for the project to be ready (2-3 minutes)
+## Environment variables
 
-### 2. Run Database Migration
-
-1. Go to your project's SQL Editor in the Supabase dashboard
-2. Copy the contents of `supabase/migrations/001_initial_schema.sql`
-3. Paste and execute the SQL to create all tables, indexes, and sample data
-
-### 3. Configure Environment Variables
-
-1. In your Supabase project dashboard, go to Settings > API
-2. Copy your project URL and keys
-3. Create `.env.local` file in the project root:
-
-```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
-
-# OpenAI Configuration
-OPENAI_API_KEY=your_openai_api_key
-
-# Application Configuration
-NEXT_PUBLIC_APP_URL=http://localhost:3001
-NEXT_PUBLIC_APP_NAME="IdeaGen AI"
+```bash
+cd idea-generation-app
+cp .env.example .env.local
 ```
 
-## Running the Application
+Fill in `.env.local`:
 
-1. Install dependencies:
+- **Required:** `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` (all from your Supabase project's Settings > API), and `OPENAI_API_KEY`.
+- **Optional:** the news, market data, and social media keys. Each one falls back to sample data if left blank, see the root [README](../README.md) for what each does.
 
-   ```bash
-   npm install
-   ```
+## Running it
 
-2. Start the development server:
+```bash
+npm install
+npm run dev
+```
 
-   ```bash
-   npm run dev -- -p 3001
-   ```
+Open [http://localhost:3000](http://localhost:3000).
 
-3. Open [http://localhost:3001](http://localhost:3001) in your browser
+## Notes
 
-## Features to Test
+- **No authentication.** This is a single-user demo, there's no login screen and no per-user data separation.
+- **Stack:** Next.js 15 (App Router) + TypeScript, Tailwind CSS, Radix UI, Supabase (PostgreSQL), OpenAI GPT-4 with a GPT-3.5 fallback.
 
-### Phase 1 - Database & Auth ( Ready)
-
-- [x] User registration and login
-- [x] Project creation and management
-- [x] AI personas configuration
-- [x] Data sources setup
-
-### Phase 2 - AI Integration ( Next)
-
-- [ ] Real OpenAI API calls for persona conversations
-- [ ] Idea generation pipeline with real AI
-- [ ] Data source connectors for external APIs
-
-### Phase 3 - Advanced Features (📋 Planned)
-
-- [ ] Real-time collaboration
-- [ ] Advanced analytics
-- [ ] Export functionality
-- [ ] File upload and processing
-
-## Architecture
-
-The application uses:
-
-- **Frontend**: Next.js 14 with TypeScript and Tailwind CSS
-- **Database**: Supabase (PostgreSQL with real-time features)
-- **AI**: OpenAI GPT-4 for persona conversations
-- **Authentication**: Supabase Auth
-- **Deployment**: Vercel (recommended)
-
-## Development Workflow
-
-1. **Mock to Real**: Systematically replace mock data with real database operations
-2. **Test Driven**: Test each feature thoroughly before moving to the next
-3. **Incremental**: Build and deploy features incrementally
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Environment Variables**: Ensure all required variables are set
-2. **Database Connection**: Verify Supabase URL and keys are correct
-3. **CORS Issues**: Check Supabase project settings for allowed origins
-4. **API Limits**: Monitor OpenAI usage to avoid rate limits
-
-### Getting Help
-
-- Check the browser console for detailed error messages
-- Verify database tables exist by checking Supabase Table Editor
-- Test API endpoints using the built-in API routes
-
-## Next Steps
-
-After completing the setup:
-
-1. Test user registration and login
-2. Create a sample project
-3. Configure AI personas
-4. Run the idea generation pipeline
-5. Review generated ideas and analytics
-
-The application is designed to be production-ready with proper error handling, security, and scalability considerations.
+See the root [README](../README.md) for what the app actually does, and [API_KEYS_SETUP.md](API_KEYS_SETUP.md) for where to get each optional API key.

@@ -16,7 +16,7 @@ A multi-persona AI brainstorming tool. Instead of asking one chatbot for one gen
 **Data Sources:** live connection status for each external API.
 ![Data Sources](docs/screenshots/data-sources.png)
 
-**Evaluation:** generated ideas ranked by score, with feasibility, market potential, and uniqueness broken out.
+**Evaluation:** generated ideas ranked by overall score, with the full problem/solution write-up for each.
 ![Evaluation](docs/screenshots/evaluation.png)
 
 **Projects:** every project with its idea count and average score rolled up.
@@ -51,7 +51,7 @@ Each persona's creativity level, risk tolerance, and expertise are configurable 
 - **Data Sources**: shows which external APIs are configured, with a live test button to preview the data they'd return.
 - **AI Personas**: screen for creating and editing personas (prompt, personality, expertise).
 - **Idea Workspace**: run a new session and watch the generation pipeline (data retrieval, seed generation, full development, persona discussion) progress in real time.
-- **Evaluation**: generated ideas ranked by score, plus a manual entry mode to score your own idea.
+- **Evaluation**: generated ideas ranked by score, plus a form to submit your own idea and have it auto-scored by the same AI pipeline.
 - **Export**: planned, not yet built.
 
 ## Tech stack
@@ -59,14 +59,15 @@ Each persona's creativity level, risk tolerance, and expertise are configurable 
 - **Frontend/Backend**: Next.js (App Router) and TypeScript, Tailwind CSS, Radix UI
 - **Database**: Supabase (PostgreSQL)
 - **AI**: OpenAI GPT-4, with GPT-3.5 fallback
-- **External data**: NewsData.io / Mediastack (news), Financial Modeling Prep / Twelve Data (market data), Reddit. Each source falls back to realistic sample data if a key isn't configured, so the app runs without any external keys set up.
+- **External data**: NewsData.io / Mediastack (news), Financial Modeling Prep / Twelve Data / Apify (market data), Reddit (social, no key required). Each source falls back to realistic sample data if a key isn't configured, so the app runs without any external keys set up.
 
 ## Getting started
 
 ```bash
 cd idea-generation-app
 npm install
-# create .env.local with the variables listed below
+cp .env.example .env.local
+# fill in .env.local with the variables listed below
 npm run dev
 ```
 
@@ -81,7 +82,8 @@ See [`idea-generation-app/SETUP.md`](idea-generation-app/SETUP.md) for full data
 | `SUPABASE_SERVICE_ROLE_KEY` | Yes | Supabase service role key (server-side only) |
 | `OPENAI_API_KEY` | Yes | Powers persona generation, scoring, and discussions |
 | `NEWS_DATA_API_KEY`, `MEDIASTACK_API_KEY` | No | Live news context; falls back to sample data |
-| `FMP_API_KEY` / Twelve Data key | No | Live market/stock context; falls back to sample data |
+| `FMP_API_KEY`, `TWELVE_DATA_API_KEY` | No | Live market/stock context; falls back to sample data |
+| `APIFY_TOKEN` | No | Additional web-scraped market data; skipped if not set |
 
 ## Project structure
 
